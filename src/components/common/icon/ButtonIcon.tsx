@@ -7,7 +7,7 @@ type ButtonIconProps = React.HTMLAttributes<HTMLButtonElement> & {
 const ButtonIcon = ({Icon, ...htmlButtonProps}: ButtonIconProps) => {
   return (
     <button className={style.button} {...htmlButtonProps}>
-      <Icon />
+      <Icon style={{marginTop: 4}} />
     </button>
   );
 };
