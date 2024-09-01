@@ -1,9 +1,15 @@
+import {Li, Ul} from '@components/common/list';
+
 const Skills = () => {
   return (
-    <p className="paragraph">
+    <div className="paragraph">
       <span className="label">{'Skills: '}</span>
-      react, typescript, design system, zustand, react-query
-    </p>
+      <Ul>
+        <Li>
+          <p className="paragraph">react, typescript, design system, zustand, react-query</p>
+        </Li>
+      </Ul>
+    </div>
   );
 };
 

@@ -45,7 +45,8 @@ const Presentation = () => {
               홍익대학교 중앙동아리 HICC에서 진행했던 세미나입니다. 주로 초심자를 대상으로 강의를 진행했습니다.
             </p>
             <p className={styles.plainText}>
-              제가 배우고 경험한 것들을 토대로 강의자료를 직접 만들고 학생들에게 공유하는 경험을 해왔습니다.
+              제가 배우고 경험한 것들을 토대로{' '}
+              <strong className="accent">강의자료를 직접 만들고 학생들에게 공유하는 경험</strong>을 해왔습니다.
             </p>
             <p className={styles.plainText}>
               이를 토대로 앞에 나와서 강의할 때 어떻게 준비하고 어떤 포인트를 집중해서 가르쳐야 하는지에 대한 경험을
@@ -89,7 +90,9 @@ const Presentation = () => {
             </Ul>
           </details>
         </Li>
-        <Li>자료를 준비해 사람들 앞에서 발표하는 일에 즐거움을 느낍니다.</Li>
+        <Li>
+          자료를 준비해 사람들 앞에서 <strong className="accent">발표하는 일에 즐거움</strong>을 느낍니다.
+        </Li>
         <Li>그 속에서 의견을 주고 받는 것도 좋아합니다.</Li>
       </Ul>
     </section>

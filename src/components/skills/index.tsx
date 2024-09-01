@@ -5,7 +5,7 @@ const Skills = () => {
   return (
     <article className="page_layout">
       <PageTitle title="Skills" />
-      <section className="" aria-label="Language">
+      <section className="label" aria-label="Language">
         <p>Language</p>
         <Ul>
           <Li>
@@ -16,7 +16,7 @@ const Skills = () => {
           </Li>
         </Ul>
       </section>
-      <section className="" aria-label="Framework">
+      <section className="label" aria-label="Framework">
         <p>Framework</p>
         <Ul>
           <Li>
@@ -24,7 +24,7 @@ const Skills = () => {
           </Li>
         </Ul>
       </section>
-      <section className="" aria-label="Bundler">
+      <section className="label" aria-label="Bundler">
         <p>Bundler</p>
         <Ul>
           <Li>
@@ -35,7 +35,7 @@ const Skills = () => {
           </Li>
         </Ul>
       </section>
-      <section className="" aria-label="Style library">
+      <section className="label" aria-label="Style library">
         <p>Style library</p>
         <Ul>
           <Li>
@@ -46,7 +46,7 @@ const Skills = () => {
           </Li>
         </Ul>
       </section>
-      <section className="" aria-label="State management library">
+      <section className="label" aria-label="State management library">
         <p>State management library</p>
         <Ul>
           <Li>
@@ -57,7 +57,7 @@ const Skills = () => {
           </Li>
         </Ul>
       </section>
-      <section className="" aria-label="Test">
+      <section className="label" aria-label="Test">
         <p>Test</p>
         <Ul>
           <Li>

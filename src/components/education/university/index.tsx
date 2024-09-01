@@ -12,7 +12,7 @@ const University = () => {
       </div>
       <Ul style={{flex: 7}}>
         <Li>
-          <p className="paragraph">전공</p>
+          <p className="label">전공</p>
         </Li>
         <Ul nestedCount={1}>
           <Li>
@@ -23,7 +23,7 @@ const University = () => {
           </Li>
         </Ul>
         <Li>
-          <p className="paragraph">평점</p>
+          <p className="label">평점</p>
         </Li>
         <Ul nestedCount={1}>
           <Li>
@@ -31,7 +31,7 @@ const University = () => {
           </Li>
         </Ul>
         <Li>
-          <p className="paragraph">기타</p>
+          <p className="label">기타</p>
         </Li>
         <Ul nestedCount={1}>
           <Li>

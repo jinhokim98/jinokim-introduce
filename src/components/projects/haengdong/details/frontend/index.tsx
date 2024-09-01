@@ -7,14 +7,16 @@ const Frontend = () => {
       <span className="label">{'Frontend: '}</span>
       <Ul>
         <Li>
-          <p className="paragraph">design system 도입</p>
+          <p className="label">design system 도입</p>
         </Li>
         <Ul nestedCount={1}>
           <Li>
             <p className="paragraph">행동대장에서 사용하는 디자인 컴포넌트를 라이브러리로 제작</p>
           </Li>
           <Li>
-            <p className="paragraph">개발자 간 통일된 디자인 구현을 위해 제작했습니다.</p>
+            <p className="paragraph">
+              <strong className="accent">개발자 간 통일된 디자인 구현</strong>을 위해 제작했습니다.
+            </p>
           </Li>
           <Li>
             <Link
@@ -27,11 +29,13 @@ const Frontend = () => {
       </Ul>
       <Ul style={{marginTop: '0.5rem'}}>
         <Li>
-          <p className="paragraph">변경에 유연하게 대응하는 방법 고민</p>
+          <p className="label">변경에 유연하게 대응하는 방법 고민</p>
         </Li>
         <Ul nestedCount={1}>
           <Li>
-            <p className="paragraph">디자인, 데이터, 기능의 분리</p>
+            <p className="paragraph">
+              <strong className="accent">디자인, 데이터, 기능</strong>의 분리
+            </p>
           </Li>
           <Ul nestedCount={2}>
             <Li>
@@ -56,7 +60,7 @@ const Frontend = () => {
       </Ul>
       <Ul style={{marginTop: '0.5rem'}}>
         <Li>
-          <p className="paragraph">클라이언트 상태를 쉽게 관리하기 위한 상태 관리 라이브러리 도입</p>
+          <p className="label">클라이언트 상태를 쉽게 관리하기 위한 상태 관리 라이브러리 도입</p>
         </Li>
         <Ul nestedCount={1}>
           <Li>
@@ -66,45 +70,47 @@ const Frontend = () => {
           </Li>
           <Li>
             <p className="paragraph">
-              지출 내역 동적 생성, 순서 변경, 금액 차등 적용 등을 고려하며, 서버 상태 만으로는 한계가 있음을 인지하고
-              클라이언트 상태, 서버 상태 두 개를 운용하기로 결정했습니다.
+              지출 내역 동적 생성, 순서 변경, 금액 차등 적용 등을 고려하며,{' '}
+              <strong className="accent">서버 상태 만으로는 한계가 있음을 인지</strong>하고 클라이언트 상태, 서버 상태
+              두 개를 운용하기로 결정했습니다.
             </p>
           </Li>
           <Li>
             <p className="paragraph">
               비동기 서버 상태는 react-query를 사용하므로 비동기 처리를 위한 상태 라이브러리 활용은 하지 않아도 되며,
-              러닝커브가 낮고 가벼운 라이브러리인 zustand를 사용하기로 결정했습니다.
+              <strong className="accent">러닝커브가 낮고 가벼운 라이브러리</strong>인 zustand를 사용하기로 결정했습니다.
             </p>
           </Li>
         </Ul>
       </Ul>
       <Ul style={{marginTop: '0.5rem'}}>
         <Li>
-          <p className="paragraph">서버 상태를 관리하기 위한 react-query 도입</p>
+          <p className="label">서버 상태를 관리하기 위한 react-query 도입</p>
         </Li>
         <Ul nestedCount={1}>
           <Li>
             <p className="paragraph">
-              클라이언트 상태를 따로 관리하기로 결정된 이후, 서버 상태와 클라이언트 상태의 동기화를 맞춰주는 필요성에
-              의해 도입했습니다.
+              클라이언트 상태를 따로 관리하기로 결정된 이후,{' '}
+              <strong className="accent">서버 상태와 클라이언트 상태의 동기화를 맞춰주는 필요성</strong>에 의해
+              도입했습니다.
             </p>
           </Li>
           <Li>
             <p className="paragraph">
-              staleTime을 1분으로 설정해서 1분 이내에 같은 데이터를 다시 요청할 경우 캐싱된 데이터를 보여주도록 해서 api
-              호출 수를 줄였습니다.
+              staleTime을 n분으로 설정해서 n분 이내에 같은 데이터를 다시 요청할 경우 캐싱된 데이터를 보여주도록 해서{' '}
+              <strong className="accent">api 호출 수</strong>를 줄였습니다.
             </p>
           </Li>
           <Li>
             <p className="paragraph">
-              캐시 무효화와 초기화를 이용해서 클라이언트 상태와 서버 상태의 동기화를 맞추어 사용자가 변경되기 전
-              데이터(이전 캐시 데이터)를 보지 않게 하도록 설정했습니다.
+              캐시 무효화와 초기화를 이용해서 클라이언트 상태와 서버 상태의 동기화를 맞추어 사용자가{' '}
+              <strong className="accent">최신의 데이터를 보장</strong>받을 수 있도록 했습니다.
             </p>
           </Li>
           <Li>
             <p className="paragraph">
-              낙관적 업데이트를 활용하여 요청의 성공 여부와 관계없이 사용자에게 변동 결과를 먼저 보여주는 UX를
-              챙겼습니다.
+              낙관적 업데이트를 활용하여 요청의 성공 여부와 관계없이{' '}
+              <strong className="accent">사용자에게 변동 결과를 먼저 보여주는 UX</strong>를 챙겼습니다.
             </p>
           </Li>
         </Ul>

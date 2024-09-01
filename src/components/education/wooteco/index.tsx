@@ -19,13 +19,19 @@ const Wooteco = () => {
           <p className="paragraph">6기 프론트엔드 쿠키</p>
         </Li>
         <Li>
-          <p className="paragraph">페어 프로그래밍으로 진행하여 빠른 피드백을 받는 경험</p>
+          <p className="paragraph">
+            페어 프로그래밍으로 진행하여 <strong className="accent">빠른 피드백</strong>을 받는 경험
+          </p>
         </Li>
         <Li>
-          <p className="paragraph">TDD 관점으로 프로그램의 핵심부터 구현해나가는 과정을 경험</p>
+          <p className="paragraph">
+            TDD 관점으로 <strong className="accent">프로그램의 핵심부터 구현</strong>해나가는 과정을 경험
+          </p>
         </Li>
         <Li>
-          <p className="paragraph">팀으로 서비스를 개발하고 사용자 피드백을 들으며 운영하는 경험</p>
+          <p className="paragraph">
+            팀으로 서비스를 개발하고 <strong className="accent">사용자 피드백을 들으며 운영</strong>하는 경험
+          </p>
         </Li>
       </Ul>
     </section>

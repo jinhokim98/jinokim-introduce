@@ -13,6 +13,7 @@ body {
 
 :root {
   --primary-color: #337ea9;
+  --primary-color-variant: #378fbd;
   --gray-color: #b2b1b6;
 }
 
@@ -57,7 +58,7 @@ body {
   font-family: 'Pretendard';
   font-size: 1rem;
   font-weight: 600;
-  line-height: 1rem;
+  line-height: 1.6rem;
 }
 
 .paragraph {
@@ -76,6 +77,10 @@ body {
 
 .primary_color {
   color: var(--primary-color);
+}
+
+.primary_variant_color {
+  color: var(--primary-color-variant);
 }
 
 .gray_color {
