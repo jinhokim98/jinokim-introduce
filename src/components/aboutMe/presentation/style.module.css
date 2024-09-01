@@ -1,0 +1,16 @@
+.accent {
+  font-weight: 700;
+}
+
+.label {
+  flex: 2;
+
+  padding-top: 1rem;
+  padding-left: 0.5rem;
+}
+
+.plainText {
+  margin-bottom: 0.5rem;
+
+  word-break: keep-all;
+}

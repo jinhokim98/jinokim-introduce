@@ -1,3 +1,18 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  height: 100vh;
+  margin: 0 2rem;
+}
+
+.name {
+  font-family: 'Pretendard';
+  font-size: 3rem;
+  font-weight: 700;
+}
+
 .header {
   display: flex;
   justify-content: space-between;

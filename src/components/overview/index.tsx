@@ -1,4 +1,4 @@
-import ButtonIcon from '@components/icon/ButtonIcon';
+import ButtonIcon from '@components/common/icon/ButtonIcon';
 import styles from './style.module.css';
 import Instagram from '@assets/images/instagram.svg?react';
 import Github from '@assets/images/github.svg?react';
@@ -9,10 +9,10 @@ const Overview = () => {
   };
 
   return (
-    <article className="page_layout">
+    <article className={styles.layout}>
       <header className={styles.header}>
         <hgroup className={styles.hgroup}>
-          <h1 className="title primary_color">김진호</h1>
+          <h1 className={`${styles.name} primary_color`}>김진호</h1>
           <h2 className="subtitle gray_color">Frontend developer</h2>
         </hgroup>
         <aside className={styles.followMe} aria-label="follow me">
