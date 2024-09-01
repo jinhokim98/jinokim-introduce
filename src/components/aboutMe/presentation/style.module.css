@@ -1,11 +1,13 @@
-.accent {
-  font-weight: 700;
+.container {
+  display: flex;
+
+  width: 100%;
 }
 
 .label {
-  flex: 2;
+  flex: 3;
 
-  padding-top: 1rem;
+  padding-top: 1.3rem;
   padding-left: 0.5rem;
 }
 

@@ -4,9 +4,9 @@ import Link from '@components/common/link';
 
 const Presentation = () => {
   return (
-    <>
+    <section className={styles.container} aria-label="presentation">
       <p className={`${styles.label} label`}>presentation</p>
-      <Ul style={{flex: 8}}>
+      <Ul style={{flex: 7}}>
         <Li spot={false}>
           <details>
             <summary>학교 중앙 동아리 세미나</summary>
@@ -92,7 +92,7 @@ const Presentation = () => {
         <Li>자료를 준비해 사람들 앞에서 발표하는 일에 즐거움을 느낍니다.</Li>
         <Li>그 속에서 의견을 주고 받는 것도 좋아합니다.</Li>
       </Ul>
-    </>
+    </section>
   );
 };
 
