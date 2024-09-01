@@ -17,6 +17,13 @@
   object-fit: contain;
 }
 
+@media screen and (max-width: 600px) {
+  .serviceImage {
+    width: 100%;
+    object-fit: contain;
+  }
+}
+
 .details {
   display: flex;
   flex-direction: column;

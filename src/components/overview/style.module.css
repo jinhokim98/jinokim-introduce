@@ -1,7 +1,7 @@
 .layout {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
 
   height: 100vh;
   margin: 0 2rem;
@@ -11,12 +11,6 @@
   font-family: 'Pretendard';
   font-size: 3rem;
   font-weight: 700;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .hgroup {
@@ -42,4 +36,21 @@
 
 .p {
   text-align: end;
+}
+
+@media screen and (max-width: 600px) {
+  .layout {
+    flex-direction: column;
+    justify-content: center;
+
+    gap: 4rem;
+  }
+
+  .buttonGroup {
+    justify-content: flex-start;
+  }
+
+  .p {
+    text-align: start;
+  }
 }
