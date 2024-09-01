@@ -1,4 +1,3 @@
-import Spot from '@assets/images/spot.svg?react';
 import styles from './style.module.css';
 
 type LiProps = {
@@ -6,16 +5,7 @@ type LiProps = {
 };
 
 const Li = ({children, spot = true}: React.PropsWithChildren<LiProps>) => {
-  return (
-    <li className={styles.li}>
-      {spot && (
-        <div className={styles.spot}>
-          <Spot />
-        </div>
-      )}
-      {children}
-    </li>
-  );
+  return <li className={spot ? styles.spotLi : styles.li}>{children}</li>;
 };
 
 export default Li;

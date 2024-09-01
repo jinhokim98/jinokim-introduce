@@ -1,13 +1,20 @@
 .li {
-  display: flex;
-  align-items: center;
-
-  gap: 0.5rem;
+  position: relative;
 }
 
-.spot {
-  display: flex;
-  align-items: flex-start;
+.spotLi {
+  position: relative;
+
+  padding-left: 1rem;
+}
+
+.spotLi::before {
+  position: absolute;
+  content: '';
+  left: 0;
+  top: 30%;
 
   width: 6px;
+  height: 6px;
+  background-image: url('../../../../assets/images/spot.svg');
 }

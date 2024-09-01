@@ -11,9 +11,7 @@ const Presentation = () => {
           <details>
             <summary>학교 중앙 동아리 세미나</summary>
             <Ul>
-              <Li>
-                <p>기간: 2022.03 ~ 2023.06</p>
-              </Li>
+              <Li>기간: 2022.03 ~ 2023.06</Li>
               <Li>
                 <Link
                   favicon="https://www.youtube.com/favicon.ico"
@@ -91,12 +89,8 @@ const Presentation = () => {
             </Ul>
           </details>
         </Li>
-        <Li>
-          <p>자료를 준비해 사람들 앞에서 발표하는 일에 즐거움을 느낍니다.</p>
-        </Li>
-        <Li>
-          <p>그 속에서 의견을 주고 받는 것도 좋아합니다.</p>
-        </Li>
+        <Li>자료를 준비해 사람들 앞에서 발표하는 일에 즐거움을 느낍니다.</Li>
+        <Li>그 속에서 의견을 주고 받는 것도 좋아합니다.</Li>
       </Ul>
     </>
   );
