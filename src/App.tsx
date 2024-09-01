@@ -1,5 +1,11 @@
+import Overview from '@components/overview';
+
 function App() {
-  return <div>hello</div>;
+  return (
+    <main>
+      <Overview />
+    </main>
+  );
 }
 
 export default App;
