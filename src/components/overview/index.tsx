@@ -21,12 +21,15 @@ const Overview = () => {
             <ButtonIcon Icon={Github} onClick={() => openSite('https://github.com/jinhokim98')} />
           </nav>
           <p className={`${styles.p} paragraph`}>
-            Blog:{' '}
+            <span className="label">{'Blog: '}</span>
             <a href="https://jinokim.tistory.com/" target="_blank_">
               Jinokim의 개발일지
             </a>
           </p>
-          <p className={`${styles.p} paragraph`}>Email: rlawlsgh1227@gmail.com</p>
+          <p className={`${styles.p} paragraph`}>
+            <span className="label">{'Email: '}</span>
+            rlawlsgh1227@gmail.com
+          </p>
         </aside>
       </header>
     </article>
