@@ -21,6 +21,12 @@ body {
 
 @font-face {
   font-family: 'Pretendard';
+  font-weight: 500;
+  src: url('../assets/fonts/Pretendard-Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Pretendard';
   font-weight: 400;
   src: url('../assets/fonts/Pretendard-Regular.woff') format('woff');
 }
@@ -36,6 +42,13 @@ body {
   font-family: 'Pretendard';
   font-size: 1.5rem;
   font-weight: 400;
+  line-height: 1rem;
+}
+
+.label {
+  font-family: 'Pretendard';
+  font-size: 1rem;
+  font-weight: 500;
   line-height: 1rem;
 }
 
