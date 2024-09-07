@@ -36,10 +36,20 @@ const Test = () => {
     }
   };
 
+  const goToss = () => {
+    const url = 'supertoss://';
+    window.location.href = url;
+  };
+
   return (
-    <button className="subtitle" style={buttonStyle} onClick={shareLink}>
-      {buttonText}
-    </button>
+    <div>
+      <button className="subtitle" style={buttonStyle} onClick={shareLink}>
+        {buttonText}
+      </button>
+      <button className="subtitle" style={buttonStyle} onClick={goToss}>
+        Toss
+      </button>
+    </div>
   );
 };
 
