@@ -36,7 +36,10 @@ const Test = () => {
     }
   };
 
-  const goToss = () => {
+  const goToss = async () => {
+    const account = '국민은행 030302-04-191806 김진호';
+    await window.navigator.clipboard.writeText(account);
+
     const url = 'supertoss://';
     window.location.href = url;
   };
