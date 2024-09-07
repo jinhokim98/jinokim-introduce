@@ -3,10 +3,11 @@ import {createBrowserRouter} from 'react-router-dom';
 import Resume from '@pages/Resume';
 import Test from '@pages/Test';
 import App from './App';
+import ROUTER_URL from '@constants/routerUrl';
 
 const router = createBrowserRouter([
   {
-    path: '',
+    path: ROUTER_URL.base,
     element: <App />,
     children: [
       {
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
         element: <Resume />,
       },
       {
-        path: 'test',
+        path: ROUTER_URL.test,
         element: <Test />,
       },
     ],
