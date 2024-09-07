@@ -1,5 +1,5 @@
 const ROUTER_URL = {
-  base: '',
+  base: '/',
   test: '/test',
 } as const;
 
