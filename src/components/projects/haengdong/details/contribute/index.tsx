@@ -61,6 +61,34 @@ const Contribute = () => {
           </Li>
         </Ul>
       </Ul>
+      <Ul style={{paddingTop: 0}}>
+        <Li>
+          <p className="paragraph">정산 초대하기 카카오톡 공유 기능 추가</p>
+        </Li>
+        <Ul nestedCount={1}>
+          <Li>
+            <Link
+              favicon="https://github.com/favicon.ico"
+              href="https://github.com/woowacourse-teams/2024-haeng-dong/pull/548"
+              text="Pull Request #548"
+            />
+          </Li>
+        </Ul>
+      </Ul>
+      <Ul style={{paddingTop: 0}}>
+        <Li>
+          <p className="paragraph">참여자 별 내역에서 토스로 송금 유도하는 기능</p>
+        </Li>
+        <Ul nestedCount={1}>
+          <Li>
+            <Link
+              favicon="https://github.com/favicon.ico"
+              href="https://github.com/woowacourse-teams/2024-haeng-dong/pull/556"
+              text="Pull Request #556"
+            />
+          </Li>
+        </Ul>
+      </Ul>
     </div>
   );
 };
