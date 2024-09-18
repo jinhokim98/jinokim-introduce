@@ -1,6 +1,6 @@
 import styles from '../style.module.css';
 import Links from './links';
-import Role from './role';
+import Contribute from './contribute';
 import Skills from './skills';
 
 const LikeLionUniversity = () => {
@@ -16,7 +16,7 @@ const LikeLionUniversity = () => {
       <section className={styles.details} aria-label="details">
         <Skills />
         <Links />
-        <Role />
+        <Contribute />
       </section>
     </>
   );

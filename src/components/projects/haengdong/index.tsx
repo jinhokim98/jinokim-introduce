@@ -1,5 +1,5 @@
 import styles from './style.module.css';
-import ServiceImage from '@assets/images/service.png';
+import ServiceImage from '@assets/images/service/haengdong.png';
 import {Skills, Links, Introduce, Frontend, Contribute} from './details';
 
 const Haengdong = () => {
@@ -11,7 +11,7 @@ const Haengdong = () => {
           {`행사 진행을 하면서 제일 어려운 일, 정산! 인원 변동에 따른 정산의 어려움을 해결해주는 서비스.
     우아한테크코스에서 FE 4명, BE 4명이 한 팀이 되어 진행한 프로젝트입니다.`}
         </p>
-        <details>
+        <details open>
           <summary className="paragraph">행동대장 소개 이미지</summary>
           <figure className={styles.figure}>
             <img src={ServiceImage} className={styles.serviceImage} alt="service image" />
