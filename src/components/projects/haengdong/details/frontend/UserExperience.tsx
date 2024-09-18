@@ -31,33 +31,21 @@ const UserExperience = () => {
             </Li>
           </Ul>
           <Li>
-            <p className="paragraph">
-              <strong className="accent">설명이 잘 보이지 않는다</strong>는 피드백을 수용하여 사용자가 헷갈리지 않도록
-              개선
-            </p>
+            <p className="paragraph">설명이 잘 보이지 않는다는 피드백을 수용하여 사용자가 헷갈리지 않도록 개선</p>
           </Li>
           <Li>
             <p className="paragraph">
-              <strong className="accent">금액을 먼저 입력하는 경향</strong>을 반영하여 지출내역 추가 시 금액을 먼저
-              등록할 수 있도록 플로우 개선
+              금액을 먼저 입력하는 경향을 반영하여 지출내역 추가 시 금액을 먼저 등록할 수 있도록 플로우 개선
             </p>
           </Li>
           <Li>
-            <p className="paragraph">
-              <strong className="accent">공유 기능의 혼동</strong>을 막기 위해 카카오톡 공유 기능 도입
-            </p>
+            <p className="paragraph">공유 기능의 혼동을 막기 위해 카카오톡 공유 기능 도입</p>
           </Li>
           <Li>
-            <p className="paragraph">
-              <strong className="accent">토스 송금 유도 기능</strong>을 도입하여 참여자가 금액 확인 후 바로 송금할 수
-              있도록 유도
-            </p>
+            <p className="paragraph">토스 송금 유도 기능을 도입하여 참여자가 금액 확인 후 바로 송금할 수 있도록 유도</p>
           </Li>
           <Li>
-            <p className="paragraph">
-              <strong className="accent">영수증 첨부 기능을 추가</strong>하여 주최자가 자동으로 지출내역을 등록할 수
-              있도록 개선
-            </p>
+            <p className="paragraph">영수증 첨부 기능을 추가하여 주최자가 자동으로 지출내역을 등록할 수 있도록 개선</p>
           </Li>
         </Ul>
       </Ul>
