@@ -1,6 +1,6 @@
 import PageTitle from '@components/common/pageTitle';
 import Haengdong from './haengdong';
-import {LikeLionUniversity} from './others';
+import {HongikFestival, LikeLionUniversity} from './others';
 
 const Projects = () => {
   return (
@@ -8,6 +8,7 @@ const Projects = () => {
       <PageTitle title="Projects" />
       <Haengdong />
       <LikeLionUniversity />
+      <HongikFestival />
     </article>
   );
 };
