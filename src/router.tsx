@@ -1,7 +1,7 @@
 import {createBrowserRouter} from 'react-router-dom';
 
-import Resume from '@pages/Resume';
-import Test from '@pages/Test';
+import Resume from '@pages/resume';
+import Test from '@pages/test';
 import App from './App';
 import ROUTER_URL from '@constants/routerUrl';
 
