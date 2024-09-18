@@ -1,0 +1,32 @@
+.hgroup {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.5rem;
+}
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.serviceImage {
+  height: 350px;
+
+  object-fit: contain;
+}
+
+@media screen and (max-width: 600px) {
+  .serviceImage {
+    width: 100%;
+    object-fit: contain;
+  }
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2rem;
+}
