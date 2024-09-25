@@ -1,35 +1,36 @@
 .layout {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
 
-  height: 100vh;
-  margin: 0 2rem;
+  margin: 1rem 2rem;
 }
 
 .name {
   font-family: 'Pretendard';
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 700;
 }
 
 .hgroup {
   display: flex;
-  flex-direction: column;
+  align-items: flex-end;
 
-  gap: 3rem;
+  gap: 1rem;
 }
 
 .followMe {
   display: flex;
-  flex-direction: column;
 
+  align-items: flex-end;
   gap: 1rem;
 }
 
 .buttonGroup {
   display: flex;
   justify-content: flex-end;
+
+  margin-top: 1rem;
 
   gap: 1rem;
 }

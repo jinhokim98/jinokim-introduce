@@ -1,7 +1,8 @@
 import ButtonIcon from '@components/common/icon/ButtonIcon';
 import styles from './style.module.css';
-import Instagram from '@assets/images/instagram.svg?react';
 import Github from '@assets/images/github.svg?react';
+import Blog from '@assets/images/blog.svg?react';
+import Email from '@assets/images/email.svg?react';
 
 const Overview = () => {
   const openSite = (site: string) => {
@@ -16,19 +17,18 @@ const Overview = () => {
       </hgroup>
       <aside className={styles.followMe} aria-label="follow me">
         <nav className={styles.buttonGroup}>
-          <ButtonIcon Icon={Instagram} onClick={() => openSite('https://www.instagram.com/jinokim98/')} />
-          <ButtonIcon Icon={Github} onClick={() => openSite('https://github.com/jinhokim98')} />
+          <ButtonIcon
+            Icon={Github}
+            displayName="jinhokim98"
+            onClick={() => openSite('https://github.com/jinhokim98')}
+          />
+          <ButtonIcon
+            Icon={Blog}
+            displayName="jinokim의 개발일지"
+            onClick={() => openSite('https://jinokim.tistory.com')}
+          />
+          <ButtonIcon Icon={Email} displayName="rlawlsgh1227@gmail.com" />
         </nav>
-        <p className={`${styles.p} paragraph`}>
-          <span className="label">{'Blog: '}</span>
-          <a href="https://jinokim.tistory.com/" target="_blank_">
-            Jinokim의 개발일지
-          </a>
-        </p>
-        <p className={`${styles.p} paragraph`}>
-          <span className="label">{'Email: '}</span>
-          rlawlsgh1227@gmail.com
-        </p>
       </aside>
     </article>
   );
