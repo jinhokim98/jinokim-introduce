@@ -1,15 +1,14 @@
 import {Li, Ul} from '@components/common/list';
 import styles from './style.module.css';
 import Link from '@components/common/link';
+import Details from '@components/common/details';
 
-const Presentation = () => {
+const Detail = () => {
   return (
     <section className={styles.container} aria-label="presentation">
-      <p className={`${styles.label} label`}>presentation</p>
-      <Ul style={{flex: 7}}>
+      <Ul>
         <Li spot={false}>
-          <details>
-            <summary>학교 중앙 동아리 세미나</summary>
+          <Details summary="학교 중앙 동아리 세미나">
             <Ul>
               <Li>기간: 2022.03 ~ 2023.06</Li>
               <Li>
@@ -41,22 +40,19 @@ const Presentation = () => {
                 />
               </Li>
             </Ul>
-            <p className={styles.plainText}>
-              홍익대학교 중앙동아리 HICC에서 진행했던 세미나입니다. 주로 초심자를 대상으로 강의를 진행했습니다.
-            </p>
-            <p className={styles.plainText}>
-              제가 배우고 경험한 것들을 토대로{' '}
-              <strong className="accent">강의자료를 직접 만들고 학생들에게 공유하는 경험</strong>을 해왔습니다.
-            </p>
-            <p className={styles.plainText}>
-              이를 토대로 앞에 나와서 강의할 때 어떻게 준비하고 어떤 포인트를 집중해서 가르쳐야 하는지에 대한 경험을
-              얻을 수 있게 되었습니다.
-            </p>
-          </details>
+            <div className={styles.detailsOtherText}>
+              <p className={`${styles.plainText} paragraph`}>홍익대학교 중앙동아리 HICC에서 진행했던 세미나입니다.</p>
+              <p className={`${styles.plainText} paragraph`}>
+                <strong className="accent">강의자료를 직접 만들고 학생들에게 공유하는 경험</strong>을 했습니다.
+              </p>
+              <p className={`${styles.plainText} paragraph`}>
+                강의할 때 어떻게 준비하고 가르쳐야 하는지에 대한 경험을 얻었습니다.
+              </p>
+            </div>
+          </Details>
         </Li>
         <Li spot={false}>
-          <details>
-            <summary>일단 도전해보기 - Hongik devtalk</summary>
+          <Details summary="일단 도전해보기 - Hongik devtalk">
             <Ul>
               <Li>
                 <p>기간: 2023.11</p>
@@ -69,13 +65,14 @@ const Presentation = () => {
                 />
               </Li>
             </Ul>
-            <p className={styles.plainText}>대학교 때 개발에 도전해봤던 스토리를 주제로 발표를 해봤습니다.</p>
-            <p className={styles.plainText}>협업 과정에서 겪었던 실패에 대해서 주로 공유했습니다.</p>
-          </details>
+            <div className={styles.detailsOtherText}>
+              <p className={styles.plainText}>대학교 때 개발에 도전해봤던 스토리를 주제로 발표를 했습니다.</p>
+              <p className={styles.plainText}>협업 과정에서 겪었던 실패에 대해서 주로 공유했습니다.</p>
+            </div>
+          </Details>
         </Li>
         <Li spot={false}>
-          <details>
-            <summary>쿠키의 쿠키 - 우아한테크코스 tecotalk</summary>
+          <Details summary="쿠키의 쿠키 - 우아한테크코스 tecotalk">
             <Ul>
               <Li>
                 <p>기간: 2024.05</p>
@@ -88,15 +85,11 @@ const Presentation = () => {
                 />
               </Li>
             </Ul>
-          </details>
+          </Details>
         </Li>
-        <Li>
-          자료를 준비해 사람들 앞에서 <strong className="accent">발표하는 일에 즐거움</strong>을 느낍니다.
-        </Li>
-        <Li>그 속에서 의견을 주고 받는 것도 좋아합니다.</Li>
       </Ul>
     </section>
   );
 };
 
-export default Presentation;
+export default Detail;

@@ -5,11 +5,9 @@ type UlProps = {
 
 const nestedUlStyle = (nestedCount: number, style?: React.CSSProperties): React.CSSProperties => {
   return {
-    padding: nestedCount === 0 ? '1rem' : `0 ${nestedCount}rem`,
+    padding: nestedCount === 0 ? 0 : `0 ${nestedCount}rem`,
     display: 'flex',
     flexDirection: 'column',
-
-    gap: '0.75rem',
 
     ...style,
   };

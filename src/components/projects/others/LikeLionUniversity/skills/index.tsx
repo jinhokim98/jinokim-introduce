@@ -1,14 +1,10 @@
-import {Li, Ul} from '@components/common/list';
+import style from './style.module.css';
 
 const Skills = () => {
   return (
-    <div className="paragraph">
-      <span className="label">{'Skills: '}</span>
-      <Ul>
-        <Li>
-          <p className="paragraph">react, typescript, react-query</p>
-        </Li>
-      </Ul>
+    <div className={style.container}>
+      <span className="label">Skils: </span>
+      <p className="paragraph">react, typescript, react-query</p>
     </div>
   );
 };

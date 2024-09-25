@@ -17,8 +17,16 @@
   word-break: keep-all;
 }
 
+.detailsOtherText {
+  margin-left: 2rem;
+}
+
 @media screen and (max-width: 600px) {
   .container {
     flex-direction: column;
+  }
+
+  .detailsOtherText {
+    margin: 0;
   }
 }

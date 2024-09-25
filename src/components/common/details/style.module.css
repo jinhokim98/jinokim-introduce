@@ -1,0 +1,21 @@
+.details {
+  cursor: pointer;
+}
+
+.summary {
+}
+
+.detailsInner {
+  display: flex;
+
+  padding: 0.5rem 1rem;
+  cursor: auto;
+}
+
+@media screen and (max-width: 600px) {
+  .detailsInner {
+    flex-direction: column;
+
+    padding: 0.5rem 1rem;
+  }
+}

@@ -3,12 +3,13 @@
   flex-direction: column;
   align-items: flex-start;
 
-  margin: 1rem 2rem;
+  margin: 2rem;
+  margin-bottom: 1rem;
 }
 
 .name {
   font-family: 'Pretendard';
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
 }
 
@@ -43,12 +44,13 @@
   .layout {
     flex-direction: column;
     justify-content: center;
-
-    gap: 4rem;
   }
 
   .buttonGroup {
+    flex-wrap: wrap;
     justify-content: flex-start;
+
+    gap: 0.5rem;
   }
 
   .p {

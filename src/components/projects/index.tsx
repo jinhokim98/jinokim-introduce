@@ -8,7 +8,7 @@ const Projects = () => {
       <PageTitle title="Projects" />
       <Haengdong />
       <LikeLionUniversity />
-      <HongikFestival />
+      {/* <HongikFestival /> */}
     </article>
   );
 };

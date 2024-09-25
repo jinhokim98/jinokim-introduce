@@ -1,18 +1,20 @@
-import DesignComponent from './DesignComponent';
-import ChangePliability from './ChangePliability';
+import style from './style.module.css';
+
+import DesignComponent from './DesignComponent/DesignComponent';
+import ChangePliability from './ChangePliability/ChangePliability';
 import ClientStateManagement from './ClientStateManagement';
 import ServerStateManagement from './ServerStateManagement';
-import UserExperience from './UserExperience';
+import UserExperience from './UserExperience/UserExperience';
 
 const Frontend = () => {
   return (
-    <div>
+    <div className={style.container}>
       <span className="label">{'Frontend: '}</span>
       <UserExperience />
       <DesignComponent />
       <ChangePliability />
-      <ClientStateManagement />
-      <ServerStateManagement />
+      {/* <ClientStateManagement />
+      <ServerStateManagement /> */}
     </div>
   );
 };
