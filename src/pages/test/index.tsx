@@ -38,7 +38,7 @@ const Test = () => {
     const account = '국민은행 030302-04-191806 김진호 10,000원';
     await window.navigator.clipboard.writeText(account);
 
-    const url = 'supertoss://';
+    const url = 'supertoss://send';
     window.location.href = url;
   };
 
