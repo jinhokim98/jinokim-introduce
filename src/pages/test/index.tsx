@@ -43,7 +43,7 @@ const Test = () => {
   };
 
   const goKakaoPay = async () => {
-    const account = '국민은행 030302-04-191806 김진호 10,000원';
+    const account = '국민은행 030302-04-191806 10,000원';
     await window.navigator.clipboard.writeText(account);
 
     const kakaoPayUrl = 'kakaotalk://kakaopay/send';
