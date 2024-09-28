@@ -42,6 +42,11 @@ const Test = () => {
     window.location.href = url;
   };
 
+  const goKakaoPay = () => {
+    const kakaoPayUrl = `kakaopay://send?amount=10000&bank=KB국민은행&accountNo=030302-04-191806`;
+    window.location.href = kakaoPayUrl;
+  };
+
   return (
     <div>
       <button className="subtitle" style={buttonStyle} onClick={shareLink}>
@@ -49,6 +54,9 @@ const Test = () => {
       </button>
       <button className="subtitle" style={buttonStyle} onClick={goToss}>
         Toss
+      </button>
+      <button className="subtitle" style={buttonStyle} onClick={goKakaoPay}>
+        KakaoPay
       </button>
     </div>
   );
