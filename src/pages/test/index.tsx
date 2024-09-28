@@ -43,7 +43,7 @@ const Test = () => {
   };
 
   const goKakaoPay = () => {
-    const kakaoPayUrl = `kakaopay://send?amount=10000&bank=KB국민은행&accountNo=030302-04-191806`;
+    const kakaoPayUrl = `kakaotalk://kakaopay/send?amount=10000&bank=KB국민은행&accountNo=030302-04-191806`;
     window.location.href = kakaoPayUrl;
   };
 
