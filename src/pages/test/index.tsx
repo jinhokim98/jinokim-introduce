@@ -46,7 +46,7 @@ const Test = () => {
     const account = '국민은행 030302-04-191806 김진호 10,000원';
     await window.navigator.clipboard.writeText(account);
 
-    const kakaoPayUrl = 'kakaotalk://kakaopay/home';
+    const kakaoPayUrl = 'kakaotalk://kakaopay/send';
     alert(kakaoPayUrl);
     const url = 'send?amount=10000&bank=KB국민은행&accountNo=030302-04-191806';
     window.location.href = kakaoPayUrl;
