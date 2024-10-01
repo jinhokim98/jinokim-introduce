@@ -1,14 +1,9 @@
 import ButtonIcon from '@components/common/icon/ButtonIcon';
 import styles from './style.module.css';
-import Github from '@assets/images/github.svg?react';
-import Blog from '@assets/images/blog.svg?react';
 import Email from '@assets/images/email.svg?react';
+import Link from '@components/common/link';
 
 const Overview = () => {
-  const openSite = (site: string) => {
-    window.open(site, '_blank');
-  };
-
   return (
     <article className={styles.layout}>
       <hgroup className={styles.hgroup}>
@@ -17,15 +12,11 @@ const Overview = () => {
       </hgroup>
       <aside className={styles.followMe} aria-label="follow me">
         <nav className={styles.buttonGroup}>
-          <ButtonIcon
-            Icon={Github}
-            displayName="jinhokim98"
-            onClick={() => openSite('https://github.com/jinhokim98')}
-          />
-          <ButtonIcon
-            Icon={Blog}
-            displayName="jinokim의 개발일지"
-            onClick={() => openSite('https://jinokim.tistory.com')}
+          <Link text="jinhokim98" href="https://github.com/jinhokim98" favicon="https://github.com/favicon.ico" />
+          <Link
+            text="jinokim의 개발일지"
+            href="https://jinokim.tistory.com"
+            favicon="https://t1.daumcdn.net/tistory_admin/favicon/tistory_favicon_32x32.ico"
           />
           <ButtonIcon Icon={Email} displayName="rlawlsgh1227@gmail.com" />
         </nav>
