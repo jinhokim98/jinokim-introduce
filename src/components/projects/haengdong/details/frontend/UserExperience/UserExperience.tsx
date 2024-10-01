@@ -7,8 +7,9 @@ const UserExperience = () => {
     <section>
       <Ol order={1} text="사용자 경험">
         <Ul nestedCount={1}>
+          <p className="paragraph">유저가 없는 서비스는 서비스가 아니라는 그라운드 룰을 기반으로</p>
           <p className="paragraph">
-            <strong className="accent">유저 테스트, 피드백</strong>를 통한 서비스 개선을 경험했습니다.
+            실제 사용자 <strong className="accent">{` 유저 테스트, 피드백`}</strong>를 통한 서비스 개선을 경험했습니다.
           </p>
           <div className={styles.container}>
             <div className={styles.left}>

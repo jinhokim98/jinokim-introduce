@@ -13,7 +13,7 @@ const ServerStateManagement = () => {
       <Li>
         <p className="paragraph">
           서버 상태 변화에 따른 상태와 refetch를 context로 관리하던 구조를 무효화를 이용한 방식으로 적용하면서
-          <strong className="accent">{` 성격에 맞지 않는 prop을`}</strong>를 줄였습니다.
+          <strong className="accent">{` 성격에 맞지 않는 prop`}</strong>을 줄일 수 있었습니다.
         </p>
       </Li>
       <Li>
