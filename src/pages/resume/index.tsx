@@ -10,12 +10,18 @@ import Skills from '@components/skills';
 const Resume = () => {
   return (
     <main className={style.layout}>
-      <Overview />
-      <AboutMe />
-      <Presentation />
-      <Projects />
-      <Education />
-      <Skills />
+      <section className={`${style.firstPage} page_start`}>
+        <Overview />
+        <AboutMe />
+        <Presentation />
+      </section>
+      <section className="page_split">
+        <Projects />
+      </section>
+      <section className="page_split">
+        <Education />
+        <Skills />
+      </section>
     </main>
   );
 };

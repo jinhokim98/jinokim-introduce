@@ -4,7 +4,7 @@ import styles from './style.module.css';
 const Introduce = () => {
   return (
     <section className={styles.container} aria-label="introduction">
-      <Ul>
+      <Ul style={{gap: '0.5rem'}}>
         <Li>안녕하세요. 프론트엔드 개발자 김진호입니다.</Li>
         <Li>활발하고 대화하는 것을 좋아합니다.</Li>
         <Li>

@@ -99,3 +99,11 @@ body {
 .section_container {
   background-color: var(--gray-color);
 }
+
+.page_start {
+  page-break-before: avoid;
+}
+
+.page_split {
+  page-break-before: always;
+}

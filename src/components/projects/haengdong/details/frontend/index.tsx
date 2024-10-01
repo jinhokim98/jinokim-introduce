@@ -11,10 +11,12 @@ const Frontend = () => {
     <div className={style.container}>
       <span className="label">{'Frontend: '}</span>
       <UserExperience />
-      <DesignComponent />
-      <ChangePliability />
-      <Library />
-      <Performance />
+      <section className="page_split">
+        <DesignComponent />
+        <ChangePliability />
+        <Library />
+        <Performance />
+      </section>
     </div>
   );
 };

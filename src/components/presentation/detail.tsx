@@ -6,10 +6,10 @@ import Details from '@components/common/details';
 const Detail = () => {
   return (
     <section className={styles.container} aria-label="presentation">
-      <Ul>
+      <Ul style={{gap: '0.5rem'}}>
         <Li spot={false}>
           <Details summary="학교 중앙 동아리 세미나">
-            <Ul>
+            <Ul style={{gap: '0.5rem'}}>
               <Li>기간: 2022.03 ~ 2023.06</Li>
               <Li>
                 <Link
@@ -53,7 +53,7 @@ const Detail = () => {
         </Li>
         <Li spot={false}>
           <Details summary="일단 도전해보기 - Hongik devtalk">
-            <Ul>
+            <Ul style={{gap: '0.5rem'}}>
               <Li>
                 <p>기간: 2023.11</p>
               </Li>
@@ -73,7 +73,7 @@ const Detail = () => {
         </Li>
         <Li spot={false}>
           <Details summary="쿠키의 쿠키 - 우아한테크코스 tecotalk">
-            <Ul>
+            <Ul style={{gap: '0.5rem'}}>
               <Li>
                 <p>기간: 2024.05</p>
               </Li>
@@ -82,6 +82,22 @@ const Detail = () => {
                   favicon="https://www.youtube.com/favicon.ico"
                   href="https://youtu.be/T9y9RsysCvQ?si=DZqYY87aTpqEW-YR"
                   text="우아한테크 [10분 테코톡] 쿠키의 쿠키"
+                />
+              </Li>
+            </Ul>
+          </Details>
+        </Li>
+        <Li spot={false}>
+          <Details summary="우아한 테크코스 발표 자료들">
+            <Ul style={{gap: '0.5rem'}}>
+              <Li>
+                <p>기간: 2024.03 ~ 10</p>
+              </Li>
+              <Li>
+                <Link
+                  favicon="https://www.notion.so/images/logo-ios.png"
+                  href="https://pyrite-column-3f5.notion.site/11214b861f15802c88afca2187eca9c0"
+                  text="테코톡 자료들"
                 />
               </Li>
             </Ul>
