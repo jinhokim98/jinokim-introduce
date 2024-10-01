@@ -88,7 +88,7 @@ const Detail = () => {
           </Details>
         </Li>
         <Li spot={false}>
-          <Details summary="우아한 테크코스 발표 자료들">
+          <Details summary="우아한테크코스 발표 자료들">
             <Ul style={{gap: '0.5rem'}}>
               <Li>
                 <p>기간: 2024.03 ~ 10</p>
