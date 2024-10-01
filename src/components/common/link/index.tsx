@@ -9,7 +9,7 @@ const Link = ({favicon, text, href}: LinkProps) => {
   return (
     <div className={styles.link} aria-label="link">
       {favicon && <img className={styles.faviconImage} src={favicon} alt="favicon" />}
-      <a href={href} className={`${styles.textDecoration} paragraph`} target="_blank_">
+      <a href={href} className={`paragraph`} target="_blank_">
         {text}
       </a>
     </div>
