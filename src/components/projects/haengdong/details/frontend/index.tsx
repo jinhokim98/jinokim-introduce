@@ -4,6 +4,7 @@ import DesignComponent from './DesignComponent/DesignComponent';
 import ChangePliability from './ChangePliability/ChangePliability';
 import UserExperience from './UserExperience/UserExperience';
 import Library from './Library';
+import Performance from './Performance';
 
 const Frontend = () => {
   return (
@@ -11,8 +12,9 @@ const Frontend = () => {
       <span className="label">{'Frontend: '}</span>
       <UserExperience />
       <DesignComponent />
-      <ChangePliability />
       <Library />
+      <ChangePliability />
+      <Performance />
     </div>
   );
 };

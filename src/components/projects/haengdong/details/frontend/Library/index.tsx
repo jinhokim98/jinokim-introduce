@@ -8,7 +8,7 @@ import ServerStateManagement from './ServerStateManagement';
 const Library = () => {
   return (
     <section>
-      <Ol order={4} text="근거있는 기술 도입">
+      <Ol order={3} text="근거있는 기술 도입">
         <Ul nestedCount={1}>
           <p className="paragraph">
             기술을 미리 도입하지 않고<strong className="accent">{` 기술도입이 필요할 때 `}</strong> 도입했습니다.
