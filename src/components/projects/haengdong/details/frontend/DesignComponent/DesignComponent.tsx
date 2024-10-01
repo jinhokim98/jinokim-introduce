@@ -24,6 +24,16 @@ const DesignComponent = () => {
               <strong className="accent">개발자 간 통일된 디자인 구현</strong>을 위해 제작했습니다.
             </p>
           </Li>
+          <Li>
+            <p className="paragraph">원래는 디자인 시스템을 구축하려 했지만 디자인 컴포넌트로 선회</p>
+          </Li>
+          <Li>
+            <Link
+              favicon="https://t1.daumcdn.net/tistory_admin/favicon/tistory_favicon_32x32.ico"
+              href="https://jinokim.tistory.com/37"
+              text="디자인 시스템을 포기한 이유"
+            />
+          </Li>
         </Ul>
       </div>
     </Ol>

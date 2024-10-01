@@ -11,3 +11,7 @@
 
   object-fit: contain;
 }
+
+.textDecoration {
+  text-decoration: underline;
+}

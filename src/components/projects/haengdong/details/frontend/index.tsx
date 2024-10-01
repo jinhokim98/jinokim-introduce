@@ -2,9 +2,8 @@ import style from './style.module.css';
 
 import DesignComponent from './DesignComponent/DesignComponent';
 import ChangePliability from './ChangePliability/ChangePliability';
-import ClientStateManagement from './ClientStateManagement';
-import ServerStateManagement from './ServerStateManagement';
 import UserExperience from './UserExperience/UserExperience';
+import Library from './Library';
 
 const Frontend = () => {
   return (
@@ -13,8 +12,7 @@ const Frontend = () => {
       <UserExperience />
       <DesignComponent />
       <ChangePliability />
-      {/* <ClientStateManagement />
-      <ServerStateManagement /> */}
+      <Library />
     </div>
   );
 };

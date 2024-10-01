@@ -25,7 +25,11 @@ const UserExperience = () => {
             </div>
             <div>
               <Li>
-                <p className="paragraph">금액을 먼저 입력하는 경향을 반영</p>
+                <Link
+                  favicon="https://t1.daumcdn.net/tistory_admin/favicon/tistory_favicon_32x32.ico"
+                  href="https://jinokim.tistory.com/36"
+                  text="금액을 먼저 입력하는 경향을 반영해서 새로운 플로우 구축"
+                />
               </Li>
               <Li>
                 <Link
