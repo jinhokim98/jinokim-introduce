@@ -10,7 +10,7 @@ const ClientStateManagement = () => {
       </Li>
       <Li>
         <p className="paragraph">
-          지출 내역 동적 생성, 순서 변경, 금액 차등 적용 등을 고려하며
+          지출 내역 동적 생성, 금액 차등 적용 등을 고려하며
           <strong className="accent">{` 서버 상태 만으로는 한계가 있음을 인지`}</strong>하고 클라이언트 상태, 서버 상태
           두 개를 운용하기로 결정했습니다.
         </p>

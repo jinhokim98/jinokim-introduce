@@ -12,8 +12,8 @@ const Frontend = () => {
       <span className="label">{'Frontend: '}</span>
       <UserExperience />
       <DesignComponent />
-      <Library />
       <ChangePliability />
+      <Library />
       <Performance />
     </div>
   );

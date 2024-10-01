@@ -3,7 +3,7 @@ import styles from './style.module.css';
 
 const ChangePliability = () => {
   return (
-    <Ol order={4} text="변경에 유연하게 대응하는 방법 고민">
+    <Ol order={3} text="변경에 유연하게 대응하는 방법 고민">
       <Ul nestedCount={1}>
         <div className={styles.container}>
           <div className={styles.left}>
