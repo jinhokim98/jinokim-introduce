@@ -7,7 +7,7 @@ type DetailProps = React.PropsWithChildren & {
   right?: React.ReactNode;
 };
 
-const Details = ({summary, open = false, children}: DetailProps) => {
+const Details = ({summary, open = true, children}: DetailProps) => {
   return (
     <details className={style.details} open={open}>
       <summary className="paragraph">{summary}</summary>
