@@ -54,7 +54,7 @@ const Test = () => {
   const goShinhan = async () => {
     const account = '국민은행 030302-04-191806 10,000원';
     await window.navigator.clipboard.writeText(account);
-    const shinhanUrl = 'sbankmoasign://';
+    const shinhanUrl = 'SFG-SHB-sbank://';
     window.location.href = shinhanUrl;
   };
 
