@@ -47,9 +47,15 @@ const Test = () => {
     await window.navigator.clipboard.writeText(account);
 
     const kakaoPayUrl = 'kakaotalk://kakaopay/home';
-    alert(kakaoPayUrl);
     const url = 'send?amount=10000&bank=KB국민은행&accountNo=030302-04-191806';
     window.location.href = kakaoPayUrl;
+  };
+
+  const goShinhan = async () => {
+    const account = '국민은행 030302-04-191806 10,000원';
+    await window.navigator.clipboard.writeText(account);
+    const shinhanUrl = 'shinhan-sr-ansimclick://';
+    window.location.href = shinhanUrl;
   };
 
   return (
@@ -62,6 +68,9 @@ const Test = () => {
       </button>
       <button className="subtitle" style={buttonStyle} onClick={goKakaoPay}>
         KakaoPay
+      </button>
+      <button className="subtitle" style={buttonStyle} onClick={goShinhan}>
+        Shinhan
       </button>
     </div>
   );
