@@ -1,3 +1,4 @@
+import BANKS from '@constants/bank';
 import {useState} from 'react';
 
 const shareObject = {
@@ -38,7 +39,7 @@ const Test = () => {
     // const account = '국민은행 030302-04-191806 김진호 10,000원';
     // await window.navigator.clipboard.writeText(account);
 
-    const url = 'supertoss://send?amount=10000&bank=KB국민은행&accountNo=030302-04-191806';
+    const url = `supertoss://send?amount=10000&bank=${bank}&accountNo=030302-04-191806`;
     window.location.href = url;
   };
 
@@ -46,16 +47,15 @@ const Test = () => {
     const account = '국민은행 030302-04-191806 10,000원';
     await window.navigator.clipboard.writeText(account);
 
-    const kakaoPayUrl = 'kakaotalk://kakaopay/money';
+    const kakaoPayUrl = 'kakaotalk://kakaopay/home';
     const url = 'send?amount=10000&bank=KB국민은행&accountNo=030302-04-191806';
     window.location.href = kakaoPayUrl;
   };
 
-  const goShinhan = async () => {
-    const account = '국민은행 030302-04-191806 10,000원';
-    await window.navigator.clipboard.writeText(account);
-    const shinhanUrl = 'SFG-SHB-sbank://';
-    window.location.href = shinhanUrl;
+  const [bank, setBank] = useState('KB국민은행');
+
+  const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setBank(event.target.value);
   };
 
   return (
@@ -66,11 +66,13 @@ const Test = () => {
       <button className="subtitle" style={buttonStyle} onClick={goToss}>
         Toss
       </button>
+      <select defaultValue={'KB국민은행'} onChange={onChange}>
+        {BANKS.map(bank => (
+          <option key={bank.name}>{bank.name}</option>
+        ))}
+      </select>
       <button className="subtitle" style={buttonStyle} onClick={goKakaoPay}>
         KakaoPay
-      </button>
-      <button className="subtitle" style={buttonStyle} onClick={goShinhan}>
-        Shinhan
       </button>
     </div>
   );
