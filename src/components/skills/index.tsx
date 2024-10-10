@@ -23,7 +23,7 @@ const Skills = () => {
 
         <section className={styles.container}>
           <span className="label">Style library: </span>
-          <p className="paragraph">Emotion.js, Emotion.js</p>
+          <p className="paragraph">Emotion.js, Styled Components</p>
         </section>
 
         <section className={styles.container}>
