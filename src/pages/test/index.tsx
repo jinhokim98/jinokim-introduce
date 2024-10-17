@@ -36,10 +36,10 @@ const Test = () => {
   };
 
   const goToss = async () => {
-    // const account = '국민은행 030302-04-191806 김진호 10,000원'
+    // const account = '국민은행 030302-04-191806 김진호 10,000원';
     // await window.navigator.clipboard.writeText(account);
 
-    const url = `supertoss://send?amount=10000&bank=NH농협&accountNo=3520910172353`;
+    const url = `supertoss://send?amount=10000&bank=${bank}&accountNo=030302-04-191806`;
     window.location.href = url;
   };
 
@@ -52,14 +52,25 @@ const Test = () => {
     window.location.href = kakaoPayUrl;
   };
 
+  const [bank, setBank] = useState('KB국민은행');
+
+  const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setBank(event.target.value);
+  };
+
   return (
     <div>
       <button className="subtitle" style={buttonStyle} onClick={shareLink}>
         {buttonText}
       </button>
       <button className="subtitle" style={buttonStyle} onClick={goToss}>
-        Toss
+        {`Toss with ${bank}`}
       </button>
+      <select defaultValue={'KB국민은행'} onChange={onChange}>
+        {BANKS.map(bank => (
+          <option key={bank.name}>{bank.name}</option>
+        ))}
+      </select>
       <button className="subtitle" style={buttonStyle} onClick={goKakaoPay}>
         KakaoPay
       </button>
