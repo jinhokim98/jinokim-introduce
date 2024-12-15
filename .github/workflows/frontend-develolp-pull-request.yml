@@ -33,4 +33,4 @@ jobs:
 
         uses: thollander/actions-comment-pull-request@v2
         with:
-          message: '🚀 **Deploy Link**: ${{ secrets.BASE_URL }}/${VITE_BRANCH_NAME}'
+          message: '🚀 **Deploy Link**: ${{ secrets.BASE_URL }}/${{ env.VITE_BRANCH_NAME }}'
