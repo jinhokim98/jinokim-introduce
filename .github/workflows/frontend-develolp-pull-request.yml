@@ -25,4 +25,8 @@ jobs:
       - name: Extract and format branch name
         run: |
           echo "VITE_BRANCH_NAME=$(echo '${{ github.head_ref }}' | sed 's#[/#]##g')" >> $GITHUB_ENV
-          echo "VITE_BRANCH_NAME is: $VITE_BRANCH_NAME"
+
+      # 3. 브랜치 이름 출력 (feature123)
+      - name: Print branch name
+        run: |
+          echo "Branch Name: $VITE_BRANCH_NAME"
