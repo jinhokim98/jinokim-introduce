@@ -1,0 +1,49 @@
+name: frontend-develop-pull-request
+
+on:
+  pull_request:
+    branches: [develop]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Git 리포지토리 체크아웃
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. AWS 인증 설정
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # 3. 브랜치 이름 변환 (feature/#123 -> feature123)
+      - name: Extract and format branch name
+        run: echo "VITE_BRANCH_NAME=$(echo '${{ github.ref_name }}' | sed 's#[/#]##g')" >> $GITHUB_ENV
+
+      # 4. 애플리케이션 빌드
+      - name: Install and Build
+        run: |
+          npm install
+          npm run build
+        env:
+          VITE_BRANCH_NAME: $VITE_BRANCH_NAME
+
+      # 5. S3에 업로드
+      - name: Deploy to S3
+        run: |
+          aws s3 sync ./build s3://${{ secrets.S3_BUCKET_NAME }}/dev/$VITE_BRANCH_NAME/ \
+            --delete
+        env:
+          VITE_BRANCH_NAME: $VITE_BRANCH_NAME
+
+      # 6. CloudFront 캐시 무효화
+      - name: Invalidate CloudFront Cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/dev/$VITE_BRANCH_NAME/*" # 브랜치별 경로 캐시 무효화
