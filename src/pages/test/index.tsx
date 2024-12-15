@@ -60,6 +60,7 @@ const Test = () => {
 
   return (
     <div>
+      aws 배포성공
       <button className="subtitle" style={buttonStyle} onClick={shareLink}>
         {buttonText}
       </button>
