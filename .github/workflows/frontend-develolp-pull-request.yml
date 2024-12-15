@@ -23,27 +23,6 @@ jobs:
 
       # 3. 브랜치 이름 변환 (feature/#123 -> feature123)
       - name: Extract and format branch name
-        run: echo "VITE_BRANCH_NAME=$(echo '${{ github.ref_name }}' | sed 's#[/#]##g')" >> $GITHUB_ENV
-
-      # 4. 애플리케이션 빌드
-      - name: Install and Build
         run: |
-          npm install
-          npm run build
-        env:
-          VITE_BRANCH_NAME: $VITE_BRANCH_NAME
-
-      # 5. S3에 업로드
-      - name: Deploy to S3
-        run: |
-          aws s3 sync ./dist s3://${{ secrets.S3_BUCKET_NAME }}/dev/$VITE_BRANCH_NAME/ \
-            --delete
-        env:
-          VITE_BRANCH_NAME: $VITE_BRANCH_NAME
-
-      # 6. CloudFront 캐시 무효화
-      - name: Invalidate CloudFront Cache
-        run: |
-          aws cloudfront create-invalidation \
-            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
-            --paths "/dev/$VITE_BRANCH_NAME/*" # 브랜치별 경로 캐시 무효화
+          echo "VITE_BRANCH_NAME=$(echo '${{ github.ref_name }}' | sed 's#[/#]##g')" >> $GITHUB_ENV
+          echo "VITE_BRANCH_NAME is: $VITE_BRANCH_NAME"
