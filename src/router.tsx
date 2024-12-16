@@ -4,7 +4,7 @@ import Resume from '@pages/resume';
 import Test from '@pages/test';
 import App from './App';
 import ROUTER_URL from '@constants/routerUrl';
-import {Feature1} from '@pages/feature/Feature1';
+import {Feature2} from '@pages/feature/Feature2';
 
 const envValue = import.meta.env.VITE_BRANCH_NAME;
 const basename = typeof envValue !== 'undefined' ? '/' + envValue : '/';
@@ -25,7 +25,7 @@ const router = createBrowserRouter(
         },
         {
           path: ROUTER_URL.feature,
-          element: <Feature1 />,
+          element: <Feature2 />,
         },
       ],
     },
