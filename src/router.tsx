@@ -8,7 +8,6 @@ import {Feature1} from '@pages/feature/Feature1';
 
 const envValue = import.meta.env.VITE_BRANCH_NAME;
 const basename = typeof envValue !== 'undefined' ? '/' + envValue : '/';
-alert(basename);
 
 const router = createBrowserRouter(
   [
