@@ -1,3 +1,3 @@
-export const Feature1 = () => {
-  return <div>feature1</div>;
+export const Feature2 = () => {
+  return <div>feature2</div>;
 };
