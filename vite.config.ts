@@ -11,6 +11,7 @@ const __dirname = path.dirname(__filename);
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), svgrPlugin()],
+  base: './',
   resolve: {
     alias: [
       {find: '@assets', replacement: path.resolve(__dirname, 'src/assets')},
