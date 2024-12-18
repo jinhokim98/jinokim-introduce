@@ -35,6 +35,21 @@ const Test = () => {
     }
   };
 
+  const gobithumb = () => {
+    const now = Date.now();
+
+    const url = 'bithumb://';
+    const storeUrl = 'https://play.google.com/store/apps/details?id=com.btckorea.bithumb';
+
+    window.location.href = url;
+
+    setTimeout(() => {
+      if (Date.now() - now < 1500) {
+        window.location.href = storeUrl;
+      }
+    }, 1000);
+  };
+
   const goToss = async () => {
     // const account = '국민은행 030302-04-191806 김진호 10,000원';
     // await window.navigator.clipboard.writeText(account);
@@ -73,6 +88,9 @@ const Test = () => {
       </select>
       <button className="subtitle" style={buttonStyle} onClick={goKakaoPay}>
         KakaoPay
+      </button>
+      <button className="subtitle" style={buttonStyle} onClick={gobithumb}>
+        빗썸
       </button>
     </div>
   );
