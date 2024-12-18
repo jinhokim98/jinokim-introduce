@@ -39,8 +39,7 @@ const Test = () => {
     const now = Date.now();
 
     const url = 'bithumb://';
-    const storeUrl = 'https://play.google.com/store/apps/details?id=com.btckorea.bithumb';
-
+    const storeUrl = 'intent://details?id=com.btckorea.bithumb#Intent;scheme=market;package=com.android.vending;end;';
     window.location.href = url;
 
     setTimeout(() => {
