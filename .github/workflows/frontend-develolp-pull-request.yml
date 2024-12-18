@@ -50,7 +50,7 @@ jobs:
 
         run: |
           aws cloudfront create-invalidation \
-            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --distribution-id ${{ secrets.DEV_CLOUDFRONT_DISTRIBUTION_ID }} \
             --paths "/dev/${VITE_BRANCH_NAME}/*"
 
       # 7. 배포 주소 PR에 코멘트 작성
@@ -60,4 +60,4 @@ jobs:
 
         uses: thollander/actions-comment-pull-request@v2
         with:
-          message: '🚀 **Deploy Link**: ${{ secrets.BASE_URL }}/${{ env.VITE_BRANCH_NAME }}'
+          message: '🚀 **Deploy Link**: ${{ secrets.DEV_BASE_URL }}/${{ env.VITE_BRANCH_NAME }}'
