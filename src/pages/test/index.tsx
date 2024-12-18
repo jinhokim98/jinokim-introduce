@@ -102,9 +102,16 @@ const Test = () => {
     const account = '국민은행 030302-04-191806 10,000원';
     await window.navigator.clipboard.writeText(account);
 
-    const kakaoPayUrl = 'kakaotalk://kakaopay/home';
-    const url = 'send?amount=10000&bank=KB국민은행&accountNo=030302-04-191806';
-    window.location.href = kakaoPayUrl;
+    navigateApp({
+      android: {
+        appScheme: `kakaotalk://kakaopay/home`,
+        storeUrl: 'intent://details?id=com.kakao.talk#Intent;scheme=market;package=com.android.vending;end;',
+      },
+      ios: {
+        appScheme: `kakaotalk://kakaopay/home`,
+        storeUrl: 'https://apps.apple.com/kr/app/kakaotalk/id362057947',
+      },
+    });
   };
 
   const [bank, setBank] = useState('KB국민은행');
