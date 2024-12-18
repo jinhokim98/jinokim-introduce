@@ -39,11 +39,26 @@ const Test = () => {
     const now = Date.now();
 
     const url = 'bithumb://';
-    const storeUrl = 'intent://details?id=com.btckorea.bithumb#Intent;scheme=market;package=com.android.vending;end;';
+    const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+    const isAndroid = /Android/.test(navigator.userAgent);
+
+    const androidStoreUrl =
+      'intent://details?id=com.btckorea.bithumb#Intent;scheme=market;package=com.android.vending;end;';
+    const iosStoreUrl = 'https://apps.apple.com/kr/app/bithumb/id1299421592?l=en-GB';
+    const storeUrl = isIOS ? iosStoreUrl : androidStoreUrl;
+
+    const isMobile = isIOS || isAndroid;
+
+    if (!isMobile) {
+      alert('모바일 기기에서만 앱 실행 및 설치가 가능합니다. 모바일 환경에서 접속해 주세요.');
+      return;
+    }
+
     window.location.href = url;
 
     setTimeout(() => {
       if (Date.now() - now < 1500) {
+        // toast로 알려줘도 좋을 듯
         window.location.href = storeUrl;
       }
     }, 1000);
