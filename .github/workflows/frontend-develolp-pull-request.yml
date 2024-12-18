@@ -13,26 +13,26 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. AWS 인증 설정
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v3
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-
-      # 3. 브랜치 이름 변환 (feature/#123 -> feature123)
+      # 2. 브랜치 이름 변환 (feature/#123 -> feature123)
       - name: Extract and format branch name
         run: |
           echo "VITE_BRANCH_NAME=$(echo '${{ github.head_ref }}' | sed 's#[/#]##g')" >> $GITHUB_ENV
 
-      # 4. 애플리케이션 빌드
+      # 3. 애플리케이션 빌드
       - name: Install and Build
         run: |
           npm install
           npm run build
         env:
           VITE_BRANCH_NAME: ${{ env.VITE_BRANCH_NAME }}
+
+      # 4. AWS 인증 설정
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
       # 5. S3에 업로드
       - name: Deploy to S3
@@ -50,7 +50,7 @@ jobs:
 
         run: |
           aws cloudfront create-invalidation \
-            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --distribution-id ${{ secrets.DEV_CLOUDFRONT_DISTRIBUTION_ID }} \
             --paths "/dev/${VITE_BRANCH_NAME}/*"
 
       # 7. 배포 주소 PR에 코멘트 작성
@@ -60,4 +60,4 @@ jobs:
 
         uses: thollander/actions-comment-pull-request@v2
         with:
-          message: '🚀 **Deploy Link**: ${{ secrets.BASE_URL }}/${{ env.VITE_BRANCH_NAME }}'
+          message: '🚀 **Deploy Link**: ${{ secrets.DEV_BASE_URL }}/${{ env.VITE_BRANCH_NAME }}'
