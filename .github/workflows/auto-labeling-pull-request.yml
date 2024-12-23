@@ -23,7 +23,7 @@ jobs:
       - name: Add Labels From Issue
         if: env.issue_number != ''
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         run: |
           issue_labels=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github+json" \
@@ -38,7 +38,7 @@ jobs:
       - name: Link Project and Update Status
         if: env.issue_number != ''
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         run: |
           project_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github+json" \
@@ -64,7 +64,7 @@ jobs:
       - name: Add Milestone
         if: env.issue_number != ''
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         run: |
           milestone_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github+json" \
@@ -79,7 +79,7 @@ jobs:
       - name: Update Issue Status to "In Review"
         if: env.issue_number != ''
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         run: |
           card_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github+json" \
