@@ -3,6 +3,8 @@ name: frontend-main-push
 on:
   push:
     branches: [main]
+    paths:
+      - 'src/**'
 
 jobs:
   deploy:
