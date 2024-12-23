@@ -3,6 +3,8 @@ name: frontend-develop-pull-request
 on:
   pull_request:
     branches: [develop]
+    paths:
+      - 'src/**'
 
 jobs:
   deploy:
