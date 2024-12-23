@@ -25,17 +25,26 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         run: |
-          echo "Checking Issue Number: ${{ env.issue_number }}"
+          echo "Fetching labels for issue #${{ env.issue_number }}"
 
-          issue_labels=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+          # Get labels from issue
+          response=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github+json" \
-            https://api.github.com/repos/${{ github.repository }}/issues/${{ env.issue_number }} | jq -r '.labels | map(.name) | @json')
+            https://api.github.com/repos/${{ github.repository }}/issues/${{ env.issue_number }})
 
+          echo "API Response: $response"
+
+          # Extract labels
+          issue_labels=$(echo "$response" | jq -r '.labels // [] | map(.name) | @json')
+          echo "Extracted Labels: $issue_labels"
+
+          # Assign labels to PR
+          echo "Assigning labels to PR #${{ github.event.pull_request.number }}"
           curl -X POST \
             -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github+json" \
             https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels \
-            -d "{\"labels\": $issue_labels}"
+            -d "$(jq -n --argjson labels "$issue_labels" '{"labels": $labels}')"
 
       - name: Link Project and Update Status
         if: env.issue_number != ''
