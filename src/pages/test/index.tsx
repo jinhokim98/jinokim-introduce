@@ -122,6 +122,7 @@ const Test = () => {
 
   return (
     <div>
+      테스트
       <button className="subtitle" style={buttonStyle} onClick={shareLink}>
         {buttonText}
       </button>
