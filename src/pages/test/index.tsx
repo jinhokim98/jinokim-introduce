@@ -122,7 +122,7 @@ const Test = () => {
 
   return (
     <div>
-      테스트
+      테스트11
       <button className="subtitle" style={buttonStyle} onClick={shareLink}>
         {buttonText}
       </button>
