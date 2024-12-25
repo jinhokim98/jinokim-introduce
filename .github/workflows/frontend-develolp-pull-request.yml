@@ -10,7 +10,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    if: github.ref_name == 'develop-test'
+    if: github.base_ref == 'develop-test'
     steps:
       - name: 'test'
         run: echo "test"
