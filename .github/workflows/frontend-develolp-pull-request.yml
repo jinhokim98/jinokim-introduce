@@ -2,12 +2,21 @@ name: frontend-develop-pull-request
 
 on:
   pull_request:
-    branches: [develop]
+    branches: [develop, develop-test]
+    paths:
+      - 'src/**'
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
 
+    if: github.base_ref == 'develop-test'
+    steps:
+      - name: 'test'
+        run: echo "test"
+
+  deploy:
+    runs-on: ubuntu-latest
     steps:
       # 1. Git 리포지토리 체크아웃
       - name: Checkout code

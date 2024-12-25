@@ -1,0 +1,110 @@
+name: Auto Labeling Pull Request
+
+on:
+  pull_request_target:
+    types:
+      - opened
+
+jobs:
+  pr_automation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract Issue Number from Branch Name
+        id: extract-issue-number
+        run: |
+          echo "branch_name=${{ github.head_ref }}" >> $GITHUB_ENV
+          issue_number=$(echo "${{ github.head_ref }}" | grep -oE '#[0-9]+' | tr -d '#')
+          echo "issue_number=$issue_number" >> $GITHUB_ENV
+          echo "Extracted Issue Number: $issue_number"
+
+      - name: Add Labels From Issue
+        if: env.issue_number != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+        run: |
+          echo "Fetching labels for issue #${{ env.issue_number }}"
+
+          # Get labels from issue
+          response=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ github.repository }}/issues/${{ env.issue_number }})
+
+          echo "API Response: $response"
+
+          # Extract labels
+          issue_labels=$(echo "$response" | jq -r '.labels // [] | map(.name) | @json')
+          echo "Extracted Labels: $issue_labels"
+
+          # Assign labels to PR
+          echo "Assigning labels to PR #${{ github.event.pull_request.number }}"
+          curl -X POST \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels \
+            -d "$(jq -n --argjson labels "$issue_labels" '{"labels": $labels}')"
+
+      - name: Link Project and Update Status
+        if: env.issue_number != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+        run: |
+          project_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ github.repository }}/projects | jq -r '.[0].id')
+
+          card_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ github.repository }}/issues/${{ env.issue_number }}/projects \
+            | jq -r '.projects[] | select(.name == "projects").id')
+
+          column_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/projects/$project_id/columns \
+            | jq -r '.columns[] | select(.name == "In Review").id')
+
+          # Move the project card to "In Review"
+          curl -X POST \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/projects/columns/$column_id/cards \
+            -d "{\"content_id\": ${{ github.event.pull_request.id }}, \"content_type\": \"PullRequest\"}"
+
+      - name: Add Milestone
+        if: env.issue_number != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+        run: |
+          milestone_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ github.repository }}/issues/${{ env.issue_number }} | jq -r '.milestone.id')
+
+          curl -X PATCH \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }} \
+            -d "{\"milestone\": $milestone_id}"
+
+      - name: Update Issue Status to "In Review"
+        if: env.issue_number != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+        run: |
+          card_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ github.repository }}/issues/${{ env.issue_number }}/projects \
+            | jq -r '.projects[] | select(.name == "projects").card.id') # Replace with your project name
+
+          column_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/projects/columns \
+            | jq -r '.columns[] | select(.name == "In Review").id')
+
+          # Move the issue card to "In Review"
+          curl -X POST \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/projects/columns/$column_id/cards \
+            -d "{\"card_id\": $card_id}"
