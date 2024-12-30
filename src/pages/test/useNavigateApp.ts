@@ -17,7 +17,7 @@ export const useNavigateApp = () => {
     if (time === 0) return;
 
     setTimeout(() => {
-      if (Date.now() - time < 1500 && document.visibilityState === 'visible') {
+      if (Date.now() - time > 1500 && document.visibilityState === 'visible') {
         // toast로 알려줘도 좋을 듯
         alert('앱이 설치되지 않았음');
       }
