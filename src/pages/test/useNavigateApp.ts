@@ -16,12 +16,16 @@ export const useNavigateApp = () => {
   useEffect(() => {
     if (time === 0) return;
 
-    setTimeout(() => {
-      if (Date.now() - time > 1500 && document.visibilityState === 'visible') {
-        // toast로 알려줘도 좋을 듯
+    const timeoutId = setTimeout(() => {
+      if (Date.now() - time >= 2500 && document.visibilityState === 'visible') {
         alert('앱이 설치되지 않았음');
       }
-    }, 1000);
+    }, 2500);
+
+    return () => {
+      clearTimeout(timeoutId);
+      setTime(0);
+    };
   }, [time]);
 
   const navigateApp = ({android, ios}: NavigateAppArgs) => {
