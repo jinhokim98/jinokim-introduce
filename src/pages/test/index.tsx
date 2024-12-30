@@ -1,5 +1,7 @@
 import BANKS from '@constants/bank';
 import {useState} from 'react';
+import {useNavigateApp} from './useNavigateApp';
+import {Link} from 'react-router-dom';
 
 const shareObject = {
   title: '행동대장',
@@ -18,42 +20,9 @@ const buttonStyle: React.CSSProperties = {
   color: 'white',
 };
 
-type NavigateAppArgs = {
-  android: AppUrl;
-  ios: AppUrl;
-};
-
-type AppUrl = {
-  appScheme: string;
-  storeUrl: string;
-};
-
-const navigateApp = ({android, ios}: NavigateAppArgs) => {
-  const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
-  const isAndroid = /Android/.test(navigator.userAgent);
-  const isMobile = isIOS || isAndroid;
-
-  if (!isMobile) {
-    alert('모바일 기기에서만 앱 실행 및 설치가 가능합니다. 모바일 환경에서 접속해 주세요.');
-    return;
-  }
-
-  const url = isIOS ? ios.appScheme : android.appScheme;
-  const storeUrl = isIOS ? ios.storeUrl : android.storeUrl;
-
-  const now = Date.now();
-  window.location.href = url;
-
-  setTimeout(() => {
-    if (Date.now() - now < 1500) {
-      // toast로 알려줘도 좋을 듯
-      window.location.href = storeUrl;
-    }
-  }, 1000);
-};
-
 const Test = () => {
   const [buttonText, setButtonText] = useState('공유하기 전');
+  const {navigateApp} = useNavigateApp();
 
   const shareLink = async () => {
     if (typeof window.navigator.share === 'undefined' || !window.navigator.canShare(shareObject)) {
@@ -122,6 +91,7 @@ const Test = () => {
 
   return (
     <div>
+      <Link to={'/'}>홈으로</Link>
       <button className="subtitle" style={buttonStyle} onClick={shareLink}>
         {buttonText}
       </button>
