@@ -51,7 +51,7 @@ jobs:
         run: |
           aws cloudfront create-invalidation \
             --distribution-id ${{ secrets.DEV_CLOUDFRONT_DISTRIBUTION_ID }} \
-            --paths "/dev/${VITE_BRANCH_NAME}/*"
+            --paths "/${VITE_BRANCH_NAME}/*"
 
       # 7. 배포 주소 PR에 코멘트 작성
       - name: Comment on PR

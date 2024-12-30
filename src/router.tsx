@@ -1,11 +1,12 @@
 import {createBrowserRouter} from 'react-router-dom';
-
-import Resume from '@pages/resume';
-import Test from '@pages/test';
+import {lazy, Suspense} from 'react';
 import App from './App';
-import ROUTER_URL from '@constants/routerUrl';
-import {Feature1} from '@pages/feature/Feature1';
 
+const Resume = lazy(() => import('@pages/resume'));
+const Test = lazy(() => import('@pages/test'));
+const Feature1 = lazy(() => import('@pages/feature/Feature1'));
+
+import ROUTER_URL from '@constants/routerUrl';
 const envValue = import.meta.env.VITE_BRANCH_NAME;
 const basename = typeof envValue !== 'undefined' ? '/' + envValue : '/';
 
@@ -13,7 +14,11 @@ const router = createBrowserRouter(
   [
     {
       path: ROUTER_URL.base,
-      element: <App />,
+      element: (
+        <Suspense>
+          <App />
+        </Suspense>
+      ),
       children: [
         {
           index: true,
