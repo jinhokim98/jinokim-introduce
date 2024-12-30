@@ -27,6 +27,16 @@ export const useNavigateApp = () => {
     };
   }, [time]);
 
+  useEffect(() => {
+    const clearTime = () => {
+      if (document.visibilityState === 'hidden') {
+        setTime(0);
+      }
+    };
+    document.addEventListener('visibilitychange', clearTime);
+    return () => document.addEventListener('visibilitychange', clearTime);
+  });
+
   const navigateApp = ({android, ios}: NavigateAppArgs) => {
     const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
     const isAndroid = /Android/.test(navigator.userAgent);
