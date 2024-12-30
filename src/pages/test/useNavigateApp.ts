@@ -17,14 +17,13 @@ export const useNavigateApp = () => {
     if (time === 0) return;
 
     const timeoutId = setTimeout(() => {
-      if (Date.now() - time >= 2500 && document.visibilityState === 'visible') {
+      if (Date.now() - time >= 1500 && document.visibilityState === 'visible') {
         alert('앱이 설치되지 않았음');
       }
-    }, 2500);
+    }, 1500);
 
     return () => {
       clearTimeout(timeoutId);
-      setTime(0);
     };
   }, [time]);
 
@@ -40,6 +39,7 @@ export const useNavigateApp = () => {
 
     const url = isIOS ? ios.appScheme : android.appScheme;
 
+    setTime(0);
     setTime(Date.now());
     window.location.href = url;
   };
