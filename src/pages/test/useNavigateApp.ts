@@ -35,7 +35,7 @@ export const useNavigateApp = () => {
     };
     document.addEventListener('visibilitychange', clearTime);
     return () => document.addEventListener('visibilitychange', clearTime);
-  });
+  }, [document.visibilityState]);
 
   const navigateApp = ({android, ios}: NavigateAppArgs) => {
     const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
