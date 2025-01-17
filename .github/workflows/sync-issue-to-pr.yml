@@ -8,9 +8,11 @@ jobs:
   sync-issue-info:
     runs-on: ubuntu-latest
     steps:
+      # 1. Git 리포지토리 체크아웃
       - name: Checkout the code
         uses: actions/checkout@v3
 
+      # 2. 브랜치 이름 추출 (#123 -> 123)
       - name: Extract issue number from PR body
         id: extract_issue
         run: |
@@ -22,23 +24,14 @@ jobs:
           ISSUE_NUMBER=$(echo "$PR_BODY" | grep -oP '#\d+' | head -1 | sed 's/#//')
           echo "ISSUE_NUMBER=$ISSUE_NUMBER" >> $GITHUB_ENV
 
-      - name: Fetch issue details
-        run: |
-          # Get assignees, labels, projects, and milestone from the issue
-          assignees=$(curl -s -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/issues/${{ env.ISSUE_NUMBER }}" \
-            | jq -r '.assignees[].login' | paste -s -d ',' -)
-          echo "ASSIGNEES=$assignees" >> $GITHUB_ENV
+      # 3. Assignees action을 발생시킨 유저로 추가
+      - name: Add Assignees
+        uses: hkusu/review-assign-action@v1
+        with:
+          assignees: ${{ github.actor }}
 
-          projects="my-project"
-          echo "PROJECTS=$projects" >> $GITHUB_ENV
-
-          milestone=$(curl -s -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/issues/${{ env.ISSUE_NUMBER }}" \
-            | jq -r '.milestone.id')
-          echo "MILESTONE=$milestone" >> $GITHUB_ENV
-
-      - name: Add Labels From Issue
+      # 4. Issue에 설정돼있는 Labels와 Milestone을 PR에 추가
+      - name: Add Labels and Milestone From Issue
         if: env.ISSUE_NUMBER != ''
         env:
           GITHUB_TOKEN: ${{ secrets.CONFIG_SUBMODULE_TOKEN }}
@@ -64,37 +57,24 @@ jobs:
             -d "$(jq -n --argjson labels "$issue_labels" '{"labels": $labels}')"
 
           # Assign milestone to PR
-           curl -X POST \
+          curl -X POST \
             -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github+json" \
             https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }} \
             -d "$(jq -n --argjson milestone "$issue_milestone" '{"milestone": $milestone}')"
 
-      - name: Link PR to Issue
-        if: env.ISSUE_NUMBER != ''
-        env:
-          GITHUB_TOKEN: ${{ secrets.CONFIG_SUBMODULE_TOKEN }}
-        run: |
-          echo "Linking PR #${{ github.event.pull_request.number }} to Issue #${{ env.ISSUE_NUMBER }}"
-          curl -X POST \
-            -H "Authorization: token $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.github+json" \
-            https://api.github.com/repos/${{ github.repository }}/issues/${{ env.ISSUE_NUMBER }}/comments \
-            -d "$(jq -n --arg body "Linked PR: #${{ github.event.pull_request.number }}" '{"body": $body}')"
-
-  add-to-project:
-    name: Add issue to project
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/add-to-project@main
-        id: addItem
+      # 5. 프로젝트에 연결
+      - name: Link Project
+        uses: actions/add-to-project@main
         with:
           project-url: https://github.com/users/jinhokim98/projects/1
           github-token: ${{ secrets.CONFIG_SUBMODULE_TOKEN }}
 
-      - uses: kalgurn/update-project-item-status@main
+      # 6. Item Status를 In Review로 변경
+      - name: Update Project Item Status (In Review)
+        uses: kalgurn/update-project-item-status@main
         with:
           project-url: https://github.com/users/jinhokim98/projects/1
           github-token: ${{ secrets.CONFIG_SUBMODULE_TOKEN }}
-          item-id: ${{ steps.addItem.outputs.itemId }}
+          item-id: ${{ steps.add-to-project.outputs.item-id }}
           status: 'In Review'
