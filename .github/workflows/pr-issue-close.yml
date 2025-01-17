@@ -14,7 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Checkout the code
+      # Step 2: Extract issue number from PR body
       - name: Extract issue number from PR body
         id: extract_issue
         run: |
