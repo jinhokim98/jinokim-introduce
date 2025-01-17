@@ -47,8 +47,13 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             https://api.github.com/repos/${{ github.repository }}/issues/${{ env.ISSUE_NUMBER }})
 
+          # Extract issue_labels
           issue_labels=$(echo "$response" | jq -r '.labels // [] | map(.name) | @json')
           echo "Extracted Labels: $issue_labels"
+
+          # Extract milestone
+          issue_milestone=$(echo "$response" | jq -r '.milestone.number // empty')
+          echo "Extracted Milestone: $issue_milestone"
 
           # Assign labels to PR
           echo "Assigning labels to PR #${{ github.event.pull_request.number }}"
@@ -57,6 +62,13 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels \
             -d "$(jq -n --argjson labels "$issue_labels" '{"labels": $labels}')"
+
+          # Assign milestone to PR
+           curl -X POST \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }} \
+            -d "$(jq -n --argjson milestone "$issue_milestone" '{"milestone": $milestone}')"
 
   add-to-project:
     name: Add issue to project
