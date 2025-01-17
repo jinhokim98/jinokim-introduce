@@ -89,9 +89,30 @@ jobs:
           item-id: ${{ steps.addItem.outputs.itemId }}
           status: 'In Review'
 
-      - name: Check ISSUE_NODE_ID Environment Variable
+      # 2. 브랜치 이름 추출 (#123 -> 123)
+      - name: Extract issue number from PR body
+        id: extract_issue
         run: |
-          echo "ISSUE_NODE_ID: ${{ env.ISSUE_NODE_ID }}"
+          # Fetch PR body
+          PR_BODY=$(curl -s -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}" \
+            | jq -r '.body')
+          # Extract issue number from PR body using regex (customize if needed)
+          ISSUE_NUMBER=$(echo "$PR_BODY" | grep -oP '#\d+' | head -1 | sed 's/#//')
+          echo "ISSUE_NUMBER=$ISSUE_NUMBER" >> $GITHUB_ENV
+
+      - name: Load node id from issue
+        if: env.ISSUE_NUMBER != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.CONFIG_SUBMODULE_TOKEN }}
+        run: |
+          response=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ github.repository }}/issues/${{ env.ISSUE_NUMBER }})
+
+          # Extract issue_node_id
+          issue_node_id=$(echo "$response" | jq -r '.node_id // empty')
+          echo "ISSUE_NODE_ID=$issue_node_id" >> $GITHUB_ENV
 
       - name: Set issue Status "In Review"
         uses: kalgurn/update-project-item-status@main
