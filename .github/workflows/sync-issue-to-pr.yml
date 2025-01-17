@@ -35,9 +35,7 @@ jobs:
             | jq -r '.labels[].name' | paste -s -d ',' -)
           echo "Labels: $labels"
 
-          projects=$(curl -s -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/issues/${{ env.ISSUE_NUMBER }}" \
-            | jq -r '.projectsV2.nodes[].title' | paste -s -d ',' -)
+          projects="my-project"
           echo "Projects: $projects"
 
           milestone=$(curl -s -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
