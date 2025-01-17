@@ -7,6 +7,10 @@ on:
 jobs:
   sync-issue-info:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
     steps:
       # 1. Git 리포지토리 체크아웃
       - name: Checkout the code
@@ -26,9 +30,9 @@ jobs:
 
       # 3. Assignees action을 발생시킨 유저로 추가
       - name: Add Assignees
-        uses: hkusu/review-assign-action@v1
+        uses: kentaro-m/auto-assign-action@v2.0.0
         with:
-          assignees: ${{ github.actor }}
+          configuration-path: '.github/auto_assign.yml'
 
       # 4. Issue에 설정돼있는 Labels와 Milestone을 PR에 추가
       - name: Add Labels and Milestone From Issue
@@ -65,6 +69,7 @@ jobs:
 
       # 5. 프로젝트에 연결
       - name: Link Project
+        id: link_project
         uses: actions/add-to-project@main
         with:
           project-url: https://github.com/users/jinhokim98/projects/1
@@ -76,5 +81,5 @@ jobs:
         with:
           project-url: https://github.com/users/jinhokim98/projects/1
           github-token: ${{ secrets.CONFIG_SUBMODULE_TOKEN }}
-          item-id: ${{ steps.add-to-project.outputs.item-id }}
+          item-id: ${{ steps.link_project.outputs.item-id }}
           status: 'In Review'
