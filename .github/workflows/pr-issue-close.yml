@@ -1,20 +1,18 @@
-name: Debug Close Issue on PR Merge
+name: Close Issue on PR Merge
 
 on:
   pull_request:
     types: [closed]
 
 jobs:
-  debug-close-issue:
+  close-issue:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Extract issue number from PR body
       - name: Extract issue number from PR body
         id: extract_issue
         run: |
@@ -24,19 +22,11 @@ jobs:
             | jq -r '.body')
           # Extract issue number from PR body using regex (customize if needed)
           ISSUE_NUMBER=$(echo "$PR_BODY" | grep -oP '#\d+' | head -1 | sed 's/#//')
-          echo "Extracted Issue Number: $ISSUE_NUMBER"
           echo "ISSUE_NUMBER=$ISSUE_NUMBER" >> $GITHUB_ENV
-
-      # Step 4: Log extracted issue number
-      - name: Log issue number
-        run: |
-          echo "Final extracted issue number is: ${{ env.ISSUE_NUMBER }}"
-
-      # Step 5: Attempt to close the associated issue (only if ISSUE_NUMBER is not empty)
       - name: Close associated issue
-        if: ${{ env.ISSUE_NUMBER && env.ISSUE_NUMBER != '' }}
+        if: env.ISSUE_NUMBER != ''
         run: |
-          echo "Attempting to close issue #${{ env.ISSUE_NUMBER }}"
+          echo "Closing issue #${{ env.ISSUE_NUMBER }}"
           curl -s -X PATCH -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             -d '{"state": "closed"}' \
