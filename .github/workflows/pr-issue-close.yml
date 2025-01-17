@@ -14,27 +14,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Fetch PR Body
-      - name: Fetch PR Body
-        id: fetch_pr_body
-        run: |
-          echo "Fetching PR Body..."
-          RESPONSE=$(curl -s -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}")
-          echo "API Response:"
-          echo "$RESPONSE"
-          PR_BODY=$(echo "$RESPONSE" | jq -r '.body')
-          echo "Extracted PR Body:"
-          echo "$PR_BODY"
-          echo "PR_BODY=$PR_BODY" >> $GITHUB_ENV
-
-      # Step 3: Extract issue number
-      - name: Extract issue number
+      # Step 2: Checkout the code
+      - name: Extract issue number from PR body
         id: extract_issue
         run: |
-          echo "Extracting issue number from PR Body..."
-          echo "PR Body: ${{ env.PR_BODY }}"
-          ISSUE_NUMBER=$(echo "${{ env.PR_BODY }}" | grep -oP '#\d+' | head -1 | sed 's/#//')
+          # Fetch PR body
+          PR_BODY=$(curl -s -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}" \
+            | jq -r '.body')
+          # Extract issue number from PR body using regex (customize if needed)
+          ISSUE_NUMBER=$(echo "$PR_BODY" | grep -oP '#\d+' | head -1 | sed 's/#//')
           echo "Extracted Issue Number: $ISSUE_NUMBER"
           echo "ISSUE_NUMBER=$ISSUE_NUMBER" >> $GITHUB_ENV
 
