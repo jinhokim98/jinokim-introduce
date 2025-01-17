@@ -44,6 +44,10 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             https://api.github.com/repos/${{ github.repository }}/issues/${{ env.ISSUE_NUMBER }})
 
+          # Extract issue_node_id
+          issue_node_id=$(echo "$response" | jq -r '.node_id // empty')
+          echo "ISSUE_NODE_ID=$issue_node_id" >> $GITHUB_ENV
+
           # Extract issue_labels
           issue_labels=$(echo "$response" | jq -r '.labels // [] | map(.name) | @json')
           echo "Extracted Labels: $issue_labels"
@@ -68,18 +72,27 @@ jobs:
             -d "$(jq -n --argjson milestone "$issue_milestone" '{"milestone": $milestone}')"
 
   link-project:
-    name: Link Project and Set Status "In Review"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/add-to-project@main
+      - name: Link Project
+        uses: actions/add-to-project@main
         id: addItem
         with:
           project-url: https://github.com/users/jinhokim98/projects/1
           github-token: ${{ secrets.CONFIG_SUBMODULE_TOKEN }}
 
-      - uses: kalgurn/update-project-item-status@main
+      - name: Set PR Status "In Review"
+        uses: kalgurn/update-project-item-status@main
         with:
           project-url: https://github.com/users/jinhokim98/projects/1
           github-token: ${{ secrets.CONFIG_SUBMODULE_TOKEN }}
           item-id: ${{ steps.addItem.outputs.itemId }}
+          status: 'In Review'
+
+      - name: Set issue Status "In Review"
+        uses: kalgurn/update-project-item-status@main
+        with:
+          project-url: https://github.com/users/jinhokim98/projects/1
+          github-token: ${{ secrets.CONFIG_SUBMODULE_TOKEN }}
+          item-id: ${{ env.ISSUE_NODE_ID }}
           status: 'In Review'
