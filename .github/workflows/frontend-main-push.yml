@@ -3,6 +3,8 @@ name: frontend-main-push
 on:
   push:
     branches: [main]
+    paths:
+      - 'src/**'
 
 jobs:
   deploy:
@@ -38,9 +40,3 @@ jobs:
           aws cloudfront create-invalidation \
             --distribution-id ${{ secrets.PROD_CLOUDFRONT_DISTRIBUTION_ID }} \
             --paths "/*"
-
-      # 6. 배포 주소 PR에 코멘트 작성
-      - name: Comment on PR
-        uses: thollander/actions-comment-pull-request@v2
-        with:
-          message: '🚀 **Deploy Link**: ${{ secrets.PROD_BASE_URL }}'
