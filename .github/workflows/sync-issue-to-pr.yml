@@ -1,0 +1,79 @@
+name: Sync Issue Info to PR
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  sync-issue-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v3
+
+      - name: Get the issue number from PR
+        id: get_issue
+        run: |
+          issue_number=$(curl -s -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}" \
+            | jq '.issue.number')
+          echo "issue_number=$issue_number" >> $GITHUB_ENV
+
+      - name: Fetch issue details and update PR
+        run: |
+          issue_number=${{ env.issue_number }}
+
+          # Get assignees, labels, projects, and milestone from the issue
+          assignees=$(curl -s -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/issues/$issue_number" \
+            | jq -r '.assignees[].login' | paste -s -d ',' -)
+
+          labels=$(curl -s -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/issues/$issue_number" \
+            | jq -r '.labels[].name' | paste -s -d ',' -)
+
+          projects=$(curl -s -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/issues/$issue_number" \
+            | jq -r '.projectsV2.nodes[].title' | paste -s -d ',' -)
+
+          milestone=$(curl -s -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/issues/$issue_number" \
+            | jq -r '.milestone.title')
+
+          # Update PR with these details
+          if [ -n "$assignees" ]; then
+            curl -X PATCH -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
+              "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}" \
+              -d "{\"assignees\": [$assignees]}"
+          fi
+          if [ -n "$labels" ]; then
+            curl -X PATCH -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
+              "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}" \
+              -d "{\"labels\": [$labels]}"
+          fi
+          if [ -n "$projects" ]; then
+            curl -X PATCH -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
+              "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}" \
+              -d "{\"projects\": [$projects]}"
+          fi
+          if [ -n "$milestone" ]; then
+            curl -X PATCH -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
+              "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}" \
+              -d "{\"milestone\": \"$milestone\"}"
+          fi
+
+          # Set the project status to "In Review" for both Issue and PR
+          project_id=$(curl -s -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/issues/$issue_number" \
+            | jq -r '.projectsV2.nodes[0].id')
+
+          if [ -n "$project_id" ]; then
+            curl -X PATCH -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
+              "https://api.github.com/projects/v2/items/${project_id}/fields" \
+              -d '{"status": "In Review"}'
+          fi
+
+          # Connect the PR to the Issue (Development column)
+          curl -X POST -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/issues/${issue_number}/events" \
+            -d '{"event": "linked"}'
