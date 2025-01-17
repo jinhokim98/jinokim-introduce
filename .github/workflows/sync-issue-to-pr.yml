@@ -65,6 +65,7 @@ jobs:
 
       # 5. 프로젝트에 연결
       - name: Link Project
+        id: link_project
         uses: actions/add-to-project@main
         with:
           project-url: https://github.com/users/jinhokim98/projects/1
@@ -76,5 +77,5 @@ jobs:
         with:
           project-url: https://github.com/users/jinhokim98/projects/1
           github-token: ${{ secrets.CONFIG_SUBMODULE_TOKEN }}
-          item-id: ${{ steps.add-to-project.outputs.item-id }}
+          item-id: ${{ steps.link_project.outputs.item-id }}
           status: 'In Review'
