@@ -18,21 +18,13 @@ jobs:
           PR_BODY=$(curl -s -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
             "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}" \
             | jq -r '.body')
-
-          # Echo PR body to confirm its content
-          echo "PR Body: $PR_BODY"
-
           # Extract issue number from PR body using regex (customize if needed)
           ISSUE_NUMBER=$(echo "$PR_BODY" | grep -oP '#\d+' | head -1 | sed 's/#//')
-
-          # Echo the extracted issue number to confirm it's correct
-          echo "Extracted Issue Number: $ISSUE_NUMBER"
-
           echo "ISSUE_NUMBER=$ISSUE_NUMBER" >> $GITHUB_ENV
 
       - name: Fetch issue details and update PR
         run: |
-          issue_number=${{ env.issue_number }}
+          issue_number=${{ env.ISSUE_NUMBER }}
 
           # Get assignees, labels, projects, and milestone from the issue
           assignees=$(curl -s -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
