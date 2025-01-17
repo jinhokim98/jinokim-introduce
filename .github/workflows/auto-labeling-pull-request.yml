@@ -12,6 +12,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # feature/#123 -> 123
       - name: Extract Issue Number from Branch Name
         id: extract-issue-number
         run: |
@@ -23,7 +24,7 @@ jobs:
       - name: Add Labels From Issue
         if: env.issue_number != ''
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+          GITHUB_TOKEN: ${{ secrets.CONFIG_SUBMODULE_TOKEN }}
         run: |
           echo "Fetching labels for issue #${{ env.issue_number }}"
 
@@ -49,7 +50,7 @@ jobs:
       - name: Link Project and Update Status
         if: env.issue_number != ''
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+          GITHUB_TOKEN: ${{ secrets.CONFIG_SUBMODULE_TOKEN }}
         run: |
           project_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github+json" \
@@ -75,7 +76,7 @@ jobs:
       - name: Add Milestone
         if: env.issue_number != ''
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+          GITHUB_TOKEN: ${{ secrets.CONFIG_SUBMODULE_TOKEN }}
         run: |
           milestone_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github+json" \
@@ -90,7 +91,7 @@ jobs:
       - name: Update Issue Status to "In Review"
         if: env.issue_number != ''
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+          GITHUB_TOKEN: ${{ secrets.CONFIG_SUBMODULE_TOKEN }}
         run: |
           card_id=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github+json" \
