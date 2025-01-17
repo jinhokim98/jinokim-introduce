@@ -1,3 +1,2 @@
 ## issue
-
 - close #n
