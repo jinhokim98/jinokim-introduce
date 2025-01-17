@@ -28,18 +28,22 @@ jobs:
           assignees=$(curl -s -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
             "https://api.github.com/repos/${{ github.repository }}/issues/${{ env.ISSUE_NUMBER }}" \
             | jq -r '.assignees[].login' | paste -s -d ',' -)
+          echo "Assignees: $assignees"
 
           labels=$(curl -s -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
             "https://api.github.com/repos/${{ github.repository }}/issues/${{ env.ISSUE_NUMBER }}" \
             | jq -r '.labels[].name' | paste -s -d ',' -)
+          echo "Labels: $labels"
 
           projects=$(curl -s -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
             "https://api.github.com/repos/${{ github.repository }}/issues/${{ env.ISSUE_NUMBER }}" \
             | jq -r '.projectsV2.nodes[].title' | paste -s -d ',' -)
+          echo "Projects: $projects"
 
           milestone=$(curl -s -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
             "https://api.github.com/repos/${{ github.repository }}/issues/${{ env.ISSUE_NUMBER }}" \
             | jq -r '.milestone.title')
+          echo "Milestone: $milestone"
 
           # Update PR with these details
           if [ -n "$assignees" ]; then
