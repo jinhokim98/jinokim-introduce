@@ -43,30 +43,19 @@ jobs:
             | jq -r '.milestone.id')
           echo "MILESTONE=$milestone" >> $GITHUB_ENV
 
-      - name: Update PR with fetched details
-        run: |
-          if [ -n "${{ env.ASSIGNEES }}" ]; then
-            curl -X PATCH -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
-              "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}" \
-              -d "{\"assignees\": [${{ env.ASSIGNEES }}]}"
-          fi
-          if [ -n "${{ env.LABEL_IDS }}" ]; then
-            curl -X PATCH -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
-              "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}" \
-              -d "{\"labels\": [${{ env.LABEL_IDS }}]}"
-          fi
-          if [ -n "${{ env.PROJECTS }}" ]; then
-            curl -X PATCH -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
-              "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}" \
-              -d "{\"projects\": [${{ env.PROJECTS }}]}"
-          fi
-          if [ -n "${{ env.MILESTONE }}" ]; then
-            curl -X PATCH -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
-              "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}" \
-              -d "{\"milestone\": \"${{ env.MILESTONE }}\"}"
-          fi
+  add-to-project:
+    name: Add issue to project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@main
+        id: addItem
+        with:
+          project-url: https://github.com/users/jinhokim98/projects/1
+          github-token: ${{ secrets.CONFIG_SUBMODULE_TOKEN }}
 
-          # Connect the PR to the Issue (Development column)
-          curl -X POST -H "Authorization: token ${{ secrets.CONFIG_SUBMODULE_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/issues/${{ env.ISSUE_NUMBER }}/events" \
-            -d '{"event": "linked"}'
+      - uses: kalgurn/update-project-item-status@main
+        with:
+          project-url: https://github.com/users/jinhokim98/projects/1
+          github-token: ${{ secrets.CONFIG_SUBMODULE_TOKEN }}
+          item-id: ${{ steps.addItem.outputs.itemId }}
+          status: 'In Review'
