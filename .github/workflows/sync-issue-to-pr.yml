@@ -70,17 +70,20 @@ jobs:
       - name: Link Project and Issue
         env:
           GITHUB_TOKEN: ${{ secrets.CONFIG_SUBMODULE_TOKEN }}
-          USER_LOGIN: 'jinhokim98'
+          PROJECT_NAME: 'jinhokim98'
           PROJECT_NUMBER: 1
 
+          # 'user' | 'organization'
+          PROJECT_TYPE: 'user'
+
         run: |
-          # 사용자 Project Node ID 가져오기
-          USER_PROJECT_NODE_ID=$(curl -s -X POST \
+          # Project Node ID 가져오기
+          PROJECT_NODE_ID=$(curl -s -X POST \
             -H "Authorization: Bearer $GITHUB_TOKEN" \
             -H "Content-Type: application/json" \
             --url https://api.github.com/graphql \
-            --data '{"query":"query { user(login: \"'$USER_LOGIN'\") { projectV2(number: '$PROJECT_NUMBER') { id } } }"}' \
-            | jq -r '.data.user.projectV2.id')
+            --data '{"query":"query { $PROJECT_TYPE(login: \"'$PROJECT_NAME'\") { projectV2(number: '$PROJECT_NUMBER') { id } } }"}' \
+            | jq -r '.data.$PROJECT_TYPE.projectV2.id')
 
           # 현재 PR의 contentId 가져오기
           PR_NODE_ID=$(curl -s -X POST \
@@ -103,7 +106,7 @@ jobs:
           -H "Authorization: Bearer $GITHUB_TOKEN" \
           -H "Content-Type: application/json" \
           --url https://api.github.com/graphql \
-          --data '{"query":"mutation { addProjectV2ItemById(input: { projectId: \"'$USER_PROJECT_NODE_ID'\", contentId: \"'$PR_NODE_ID'\" }) { item { id } } }"}')
+          --data '{"query":"mutation { addProjectV2ItemById(input: { projectId: \"'$PROJECT_NODE_ID'\", contentId: \"'$PR_NODE_ID'\" }) { item { id } } }"}')
 
           # pr-item-id 추출
           PR_ITEM_ID=$(echo "$PR_RESPONSE" | jq -r '.data.addProjectV2ItemById.item.id')
@@ -114,24 +117,38 @@ jobs:
           -H "Authorization: Bearer $GITHUB_TOKEN" \
           -H "Content-Type: application/json" \
           --url https://api.github.com/graphql \
-          --data '{"query":"mutation { addProjectV2ItemById(input: { projectId: \"'$USER_PROJECT_NODE_ID'\", contentId: \"'$ISSUE_NODE_ID'\" }) { item { id } } }"}')
+          --data '{"query":"mutation { addProjectV2ItemById(input: { projectId: \"'$PROJECT_NODE_ID'\", contentId: \"'$ISSUE_NODE_ID'\" }) { item { id } } }"}')
 
           # issue-item-id 추출
           ISSUE_ITEM_ID=$(echo "$ISSUE_RESPONSE" | jq -r '.data.addProjectV2ItemById.item.id')
           echo "ISSUE_ITEM_ID=$ISSUE_ITEM_ID" >> $GITHUB_ENV
 
       - name: Set PR Status "In Review"
+        env:
+          PROJECT_NAME: 'jinhokim98'
+          PROJECT_NUMBER: 1
+
+          # 'users' | 'orgs'
+          PROJECT_TYPE: 'users'
+
         uses: kalgurn/update-project-item-status@main
         with:
-          project-url: https://github.com/users/jinhokim98/projects/1
+          project-url: https://github.com/$PROJECT_TYPE/$PROJECT_NAME/projects/$PROJECT_NUMBER
           github-token: ${{ secrets.CONFIG_SUBMODULE_TOKEN }}
           item-id: ${{ env.PR_ITEM_ID }}
           status: 'In Review'
 
       - name: Set Issue Status "In Review"
+        env:
+          PROJECT_NAME: 'jinhokim98'
+          PROJECT_NUMBER: 1
+
+          # 'users' | 'orgs'
+          PROJECT_TYPE: 'users'
+
         uses: kalgurn/update-project-item-status@main
         with:
-          project-url: https://github.com/users/jinhokim98/projects/1
+          project-url: https://github.com/$PROJECT_TYPE/$PROJECT_NAME/projects/$PROJECT_NUMBER
           github-token: ${{ secrets.CONFIG_SUBMODULE_TOKEN }}
           item-id: ${{ env.ISSUE_ITEM_ID }}
           status: 'In Review'
